@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace paint
@@ -18,52 +12,61 @@ namespace paint
         Point endLocation;
         IShape shape;
         bool isMouseDown;
-        enum shapes { ucgen = 3, dortgen = 4, besgen = 5, altıgen = 6, yedigen = 7, daire = 40 };
-        int shapeNumber = 0;
-        Pen pen = new Pen(Color.Black, 2f);
+        Consts.Shapes choosedShape;
+        Consts.ProgramMode programMod;
 
+        //pen stores color attribute it also has brush property.
+        Pen pen;
+        Graphics g;
 
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            // e.Graphics.DrawRectangle(pen, Math.Min(startLocation.X, endLocation.X), Math.Min(startLocation.Y, endLocation.Y), Math.Abs(endLocation.X - startLocation.X), Math.Abs(endLocation.Y - startLocation.Y));
-            //e.Graphics.DrawPolygon(pen, new PolygonDrawer(3, startLocation, endLocation).shapeCornersLocation);
-
-
-            if (shapeNumber != 0)
-            {
-                e.Graphics.DrawPolygon(pen, shape.shapeCornersLocation);
-                e.Graphics.FillPolygon(pen.Brush, shape.shapeCornersLocation);
-            }
+            choosedShape = Consts.Shapes.noShape;
+            programMod = Consts.ProgramMode.choosing;
+            endLocation.X = -1;
+            endLocation.Y = -1;
+            pen = new Pen(Color.Black, 2f);
+            g = pictureBox1.CreateGraphics();
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
         }
 
 
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (isMouseDown && endLocation.X != -1 && endLocation.Y != -1 && choosedShape != Consts.Shapes.noShape && programMod == Consts.ProgramMode.draw)
             {
                 endLocation = e.Location;
-                shape = new PolygonDraw(shapeNumber, startLocation, endLocation);
-                pictureBox1.Refresh();
+                shape = new Polygon(((int)choosedShape), startLocation, endLocation);
+                g.DrawPolygon(pen, shape.shapeCornerPoints);
+                g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
+            
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
             isMouseDown = false;
+
         }
 
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
         {
             startLocation = e.Location;
-            isMouseDown = true;
+            endLocation = e.Location;
+            //we only allow to draw with left mouse button.
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = true;
+            }
+
+
+
         }
 
 
@@ -72,32 +75,32 @@ namespace paint
         //hexagon button
         private void button3_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.altıgen);
+            choosedShape = Consts.Shapes.altıgen;
         }
         //triangle button
         private void button1_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.ucgen);
+            choosedShape = Consts.Shapes.ucgen;
         }
         //rectangle button
         private void button2_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.dortgen);
+            choosedShape = Consts.Shapes.dortgen;
         }
         //pentagon button
         private void button4_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.besgen);
+            choosedShape = Consts.Shapes.besgen;
         }
 
         private void heptagon_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.yedigen);
+            choosedShape = Consts.Shapes.yedigen;
         }
 
         private void circle_Click(object sender, EventArgs e)
         {
-            shapeNumber = ((int)shapes.daire);
+            choosedShape = Consts.Shapes.daire;
         }
 
 
@@ -146,31 +149,34 @@ namespace paint
         {
             pen.Color = Color.LightSeaGreen;
         }
-    }
 
+        private void pencil_Click(object sender, EventArgs e)
+        {
+            programMod = Consts.ProgramMode.draw;
+        }
+
+        private void recyle_Click(object sender, EventArgs e)
+        {
+            programMod = Consts.ProgramMode.clear;
+            g.Clear(Color.OldLace);
+            //will do something TODO:
+        }
+
+        private void choose_Click(object sender, EventArgs e)
+        {
+            programMod = Consts.ProgramMode.choosing;
+        }
+
+    }
 }
 
 
 /*
- saklanan veriler
+ TODO:
 
-hangi şekil ve denklemleri
+-will set the paint area bounds
+-create save system
+-make menu choosable PrograMode.choosing
+-make delete object from paint area or delete everything in paint area PrograMode.recyle
 
-renk
-
-başlangıç noktası, son nokta
-
-
- */
-/*
- jsonda tutulacak veriler..
-    
-    renk,konum bilgileri,şekil numarası
- */
-
-
-/*
- metotlar
-draw line
-    
  */
