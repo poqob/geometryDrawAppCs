@@ -60,6 +60,8 @@ namespace paint
                     if (Convert.ToInt32(Math.Sqrt(Math.Pow(Consts.boundPoints[i].X - shapeCornerPoints[j].X, 2) + Math.Pow(Consts.boundPoints[i].Y - shapeCornerPoints[j].Y, 2))) < 2)
                     {
                         //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO 
+                        Consts.programMod = Consts.ProgramMode.clear;
+                        
                     }
                 }
             }

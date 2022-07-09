@@ -11,6 +11,8 @@ namespace paint
 
         public static Point[] boundPoints;
 
+        public static ProgramMode programMod;
+
 
         //TODO: all edges will be pointed we only have 2 edges just now. L,R,T,Bottom
         //dedecting paint area bounds point by point.

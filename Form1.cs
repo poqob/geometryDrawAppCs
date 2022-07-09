@@ -13,7 +13,6 @@ namespace paint
         IShape shape;
         bool isMouseDown;
         Consts.Shapes choosedShape;
-        Consts.ProgramMode programMod;
 
         //pen stores color attribute it also has brush property.
         Pen pen;
@@ -24,7 +23,7 @@ namespace paint
         {
             InitializeComponent();
             choosedShape = Consts.Shapes.noShape;
-            programMod = Consts.ProgramMode.choosing;
+            Consts.programMod = Consts.ProgramMode.choosing;
             endLocation.X = -1;
             endLocation.Y = -1;
             pen = new Pen(Color.Black, 2f);
@@ -38,21 +37,24 @@ namespace paint
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown && endLocation.X != -1 && endLocation.Y != -1 && choosedShape != Consts.Shapes.noShape && programMod == Consts.ProgramMode.draw)
+            if (isMouseDown && endLocation.X != -1 && endLocation.Y != -1 && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
             {
                 endLocation = e.Location;
                 shape = new Polygon(((int)choosedShape), startLocation, endLocation);
                 g.DrawPolygon(pen, shape.shapeCornerPoints);
                 g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
-            
+
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
             isMouseDown = false;
-
+            if (Consts.programMod==Consts.ProgramMode.clear)
+            {
+                Consts.programMod = Consts.ProgramMode.draw;
+            }
         }
 
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
@@ -65,8 +67,10 @@ namespace paint
                 isMouseDown = true;
             }
 
-
-
+            if (Consts.programMod == Consts.ProgramMode.clear)
+            {
+                Consts.programMod = Consts.ProgramMode.draw;
+            }
         }
 
 
@@ -152,19 +156,19 @@ namespace paint
 
         private void pencil_Click(object sender, EventArgs e)
         {
-            programMod = Consts.ProgramMode.draw;
+            Consts.programMod = Consts.ProgramMode.draw;
         }
 
         private void recyle_Click(object sender, EventArgs e)
         {
-            programMod = Consts.ProgramMode.clear;
+            Consts.programMod = Consts.ProgramMode.clear;
             g.Clear(Color.OldLace);
             //will do something TODO:
         }
 
         private void choose_Click(object sender, EventArgs e)
         {
-            programMod = Consts.ProgramMode.choosing;
+            Consts.programMod = Consts.ProgramMode.choosing;
         }
 
     }
