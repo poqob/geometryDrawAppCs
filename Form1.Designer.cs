@@ -31,13 +31,11 @@ namespace paint
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.heptagon = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.recyle = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.choose = new System.Windows.Forms.Button();
             this.pencil = new System.Windows.Forms.Button();
-            this.circle = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button17 = new System.Windows.Forms.Button();
@@ -54,11 +52,13 @@ namespace paint
             this.darkCyan = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.heptagon = new System.Windows.Forms.Button();
             this.rectangle = new System.Windows.Forms.Button();
+            this.circle = new System.Windows.Forms.Button();
             this.triangle = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pentagon = new System.Windows.Forms.Button();
             this.hexagon = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -71,29 +71,14 @@ namespace paint
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.heptagon);
             this.panel1.Controls.Add(this.groupBox4);
-            this.panel1.Controls.Add(this.circle);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(704, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(144, 536);
             this.panel1.TabIndex = 0;
-            // 
-            // heptagon
-            // 
-            this.heptagon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("heptagon.BackgroundImage")));
-            this.heptagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.heptagon.Location = new System.Drawing.Point(14, 140);
-            this.heptagon.Name = "heptagon";
-            this.heptagon.Size = new System.Drawing.Size(50, 52);
-            this.heptagon.TabIndex = 5;
-            this.heptagon.Text = "Y";
-            this.heptagon.UseVisualStyleBackColor = true;
-            this.heptagon.Click += new System.EventHandler(this.heptagon_Click);
             // 
             // groupBox4
             // 
@@ -150,18 +135,6 @@ namespace paint
             this.pencil.UseVisualStyleBackColor = true;
             this.pencil.Click += new System.EventHandler(this.pencil_Click);
             // 
-            // circle
-            // 
-            this.circle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("circle.BackgroundImage")));
-            this.circle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.circle.Location = new System.Drawing.Point(83, 140);
-            this.circle.Name = "circle";
-            this.circle.Size = new System.Drawing.Size(50, 52);
-            this.circle.TabIndex = 6;
-            this.circle.Text = "C";
-            this.circle.UseVisualStyleBackColor = true;
-            this.circle.Click += new System.EventHandler(this.circle_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label4);
@@ -177,7 +150,7 @@ namespace paint
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 15);
+            this.label4.Location = new System.Drawing.Point(23, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 17);
             this.label4.TabIndex = 19;
@@ -187,7 +160,7 @@ namespace paint
             // 
             this.button17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button17.BackgroundImage")));
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button17.Location = new System.Drawing.Point(79, 35);
+            this.button17.Location = new System.Drawing.Point(79, 32);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(36, 39);
             this.button17.TabIndex = 22;
@@ -197,7 +170,7 @@ namespace paint
             // 
             this.button19.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button19.BackgroundImage")));
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button19.Location = new System.Drawing.Point(30, 35);
+            this.button19.Location = new System.Drawing.Point(30, 32);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(36, 39);
             this.button19.TabIndex = 20;
@@ -230,7 +203,7 @@ namespace paint
             this.darkOrange.Size = new System.Drawing.Size(36, 39);
             this.darkOrange.TabIndex = 11;
             this.darkOrange.UseVisualStyleBackColor = false;
-            this.darkOrange.Click += new System.EventHandler(this.darkOrange_Click);
+            this.darkOrange.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // red
             // 
@@ -240,7 +213,7 @@ namespace paint
             this.red.Size = new System.Drawing.Size(36, 39);
             this.red.TabIndex = 6;
             this.red.UseVisualStyleBackColor = false;
-            this.red.Click += new System.EventHandler(this.red_Click);
+            this.red.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // seaGreen
             // 
@@ -250,7 +223,7 @@ namespace paint
             this.seaGreen.Size = new System.Drawing.Size(36, 39);
             this.seaGreen.TabIndex = 7;
             this.seaGreen.UseVisualStyleBackColor = false;
-            this.seaGreen.Click += new System.EventHandler(this.seaGreen_Click);
+            this.seaGreen.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // royaleBlue
             // 
@@ -260,7 +233,7 @@ namespace paint
             this.royaleBlue.Size = new System.Drawing.Size(36, 39);
             this.royaleBlue.TabIndex = 8;
             this.royaleBlue.UseVisualStyleBackColor = false;
-            this.royaleBlue.Click += new System.EventHandler(this.royaleBlue_Click);
+            this.royaleBlue.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // khaki
             // 
@@ -270,7 +243,7 @@ namespace paint
             this.khaki.Size = new System.Drawing.Size(36, 39);
             this.khaki.TabIndex = 9;
             this.khaki.UseVisualStyleBackColor = false;
-            this.khaki.Click += new System.EventHandler(this.khaki_Click);
+            this.khaki.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // darkOrchid
             // 
@@ -280,7 +253,7 @@ namespace paint
             this.darkOrchid.Size = new System.Drawing.Size(36, 39);
             this.darkOrchid.TabIndex = 10;
             this.darkOrchid.UseVisualStyleBackColor = false;
-            this.darkOrchid.Click += new System.EventHandler(this.darkOrchid_Click);
+            this.darkOrchid.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // cyan
             // 
@@ -290,7 +263,7 @@ namespace paint
             this.cyan.Size = new System.Drawing.Size(36, 39);
             this.cyan.TabIndex = 12;
             this.cyan.UseVisualStyleBackColor = false;
-            this.cyan.Click += new System.EventHandler(this.cyan_Click);
+            this.cyan.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // lightSeaGreen
             // 
@@ -300,7 +273,7 @@ namespace paint
             this.lightSeaGreen.Size = new System.Drawing.Size(36, 39);
             this.lightSeaGreen.TabIndex = 13;
             this.lightSeaGreen.UseVisualStyleBackColor = false;
-            this.lightSeaGreen.Click += new System.EventHandler(this.lightSeaGreen_Click);
+            this.lightSeaGreen.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // darkCyan
             // 
@@ -310,7 +283,7 @@ namespace paint
             this.darkCyan.Size = new System.Drawing.Size(36, 39);
             this.darkCyan.TabIndex = 14;
             this.darkCyan.UseVisualStyleBackColor = false;
-            this.darkCyan.Click += new System.EventHandler(this.darkCyan_Click);
+            this.darkCyan.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // label2
             // 
@@ -323,50 +296,81 @@ namespace paint
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.heptagon);
             this.groupBox1.Controls.Add(this.rectangle);
+            this.groupBox1.Controls.Add(this.circle);
             this.groupBox1.Controls.Add(this.triangle);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.pentagon);
             this.groupBox1.Controls.Add(this.hexagon);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox1.Location = new System.Drawing.Point(3, 24);
+            this.groupBox1.Location = new System.Drawing.Point(5, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(141, 110);
+            this.groupBox1.Size = new System.Drawing.Size(141, 202);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
+            // 
+            // heptagon
+            // 
+            this.heptagon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("heptagon.BackgroundImage")));
+            this.heptagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.heptagon.Location = new System.Drawing.Point(8, 146);
+            this.heptagon.Name = "heptagon";
+            this.heptagon.Size = new System.Drawing.Size(50, 52);
+            this.heptagon.TabIndex = 5;
+            this.heptagon.UseVisualStyleBackColor = true;
+            this.heptagon.Click += new System.EventHandler(this.heptagon_Click);
             // 
             // rectangle
             // 
             this.rectangle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rectangle.BackgroundImage")));
             this.rectangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.rectangle.Location = new System.Drawing.Point(79, 0);
+            this.rectangle.Location = new System.Drawing.Point(77, 30);
             this.rectangle.Name = "rectangle";
             this.rectangle.Size = new System.Drawing.Size(50, 52);
             this.rectangle.TabIndex = 2;
-            this.rectangle.Text = "D";
             this.rectangle.UseVisualStyleBackColor = true;
             this.rectangle.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // circle
+            // 
+            this.circle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("circle.BackgroundImage")));
+            this.circle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.circle.Location = new System.Drawing.Point(77, 146);
+            this.circle.Name = "circle";
+            this.circle.Size = new System.Drawing.Size(50, 52);
+            this.circle.TabIndex = 6;
+            this.circle.UseVisualStyleBackColor = true;
+            this.circle.Click += new System.EventHandler(this.circle_Click);
             // 
             // triangle
             // 
             this.triangle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("triangle.BackgroundImage")));
             this.triangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.triangle.Location = new System.Drawing.Point(10, 0);
+            this.triangle.Location = new System.Drawing.Point(8, 30);
             this.triangle.Name = "triangle";
             this.triangle.Size = new System.Drawing.Size(50, 52);
             this.triangle.TabIndex = 1;
-            this.triangle.Text = "U";
             this.triangle.UseVisualStyleBackColor = true;
             this.triangle.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "sekiller";
             // 
             // pentagon
             // 
             this.pentagon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pentagon.BackgroundImage")));
             this.pentagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pentagon.Location = new System.Drawing.Point(10, 58);
+            this.pentagon.Location = new System.Drawing.Point(8, 88);
             this.pentagon.Name = "pentagon";
             this.pentagon.Size = new System.Drawing.Size(50, 52);
             this.pentagon.TabIndex = 3;
-            this.pentagon.Text = "B";
             this.pentagon.UseVisualStyleBackColor = true;
             this.pentagon.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -374,22 +378,12 @@ namespace paint
             // 
             this.hexagon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("hexagon.BackgroundImage")));
             this.hexagon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.hexagon.Location = new System.Drawing.Point(79, 58);
+            this.hexagon.Location = new System.Drawing.Point(77, 88);
             this.hexagon.Name = "hexagon";
             this.hexagon.Size = new System.Drawing.Size(50, 52);
             this.hexagon.TabIndex = 4;
-            this.hexagon.Text = "A";
             this.hexagon.UseVisualStyleBackColor = true;
             this.hexagon.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "sekiller";
             // 
             // pictureBox1
             // 
@@ -413,7 +407,6 @@ namespace paint
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -421,6 +414,7 @@ namespace paint
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

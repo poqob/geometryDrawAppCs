@@ -5,18 +5,21 @@ namespace paint
 {
     static class Consts
     {
-        public enum Shapes { noShape = 0, ucgen = 3, dortgen = 4, besgen = 5, altıgen = 6, yedigen = 7, daire = 40 };
+        public  enum Shapes { noShape = 0, ucgen = 3, dortgen = 4, besgen = 5, altıgen = 6, yedigen = 7, daire = 40 };
 
-        public enum ProgramMode { choosing = 0, clear = 1, draw = 2 };
+        public enum ProgramMode { choosing = 0, stopDrawing = 1, draw = 2 };
 
         public static Point[] boundPoints;
 
         public static ProgramMode programMod;
 
+        
 
-        //TODO: all edges will be pointed we only have 2 edges just now. L,R,T,Bottom
+
+        //TODO: all edges will be pointed we only have 2 edges just now. L,R,T,Bottom++
         //dedecting paint area bounds point by point.
         //paintAreaSize stores width and height values of paint area.
+        //purpose of paintAreaBoundPointsDedector() is to dedect paint area bound point by point and attempt that points to boundPoints(Point[]) variable.
         public static void paintAreaBoundPointsDedector(Size paintAreaSize)
         {
             boundPoints = new Point[(paintAreaSize.Width + paintAreaSize.Height)*2];

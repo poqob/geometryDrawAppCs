@@ -13,8 +13,6 @@ namespace paint
         IShape shape;
         bool isMouseDown;
         Consts.Shapes choosedShape;
-
-        //pen stores color attribute it also has brush property.
         Pen pen;
         Graphics g;
 
@@ -44,14 +42,13 @@ namespace paint
                 g.DrawPolygon(pen, shape.shapeCornerPoints);
                 g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
             isMouseDown = false;
-            if (Consts.programMod==Consts.ProgramMode.clear)
+            if (Consts.programMod == Consts.ProgramMode.stopDrawing)
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
@@ -67,7 +64,7 @@ namespace paint
                 isMouseDown = true;
             }
 
-            if (Consts.programMod == Consts.ProgramMode.clear)
+            if (Consts.programMod == Consts.ProgramMode.stopDrawing)
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
@@ -75,6 +72,7 @@ namespace paint
 
 
 
+        //panel1 buttons.
 
         //hexagon button
         private void button3_Click(object sender, EventArgs e)
@@ -96,81 +94,48 @@ namespace paint
         {
             choosedShape = Consts.Shapes.besgen;
         }
-
+        //heptagon button
         private void heptagon_Click(object sender, EventArgs e)
         {
             choosedShape = Consts.Shapes.yedigen;
         }
-
+        //circle button
         private void circle_Click(object sender, EventArgs e)
         {
             choosedShape = Consts.Shapes.daire;
         }
 
-
-        private void royaleBlue_Click(object sender, EventArgs e)
+        private void colorChooseClick(object sender, EventArgs e)
         {
-            pen.Color = Color.RoyalBlue;
-        }
-
-        private void seaGreen_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.SeaGreen;
-
-        }
-
-        private void khaki_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.Khaki;
-        }
-
-        private void red_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.Red;
-        }
-
-        private void darkOrange_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.DarkOrange;
-        }
-
-        private void darkOrchid_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.DarkOrchid;
-        }
-
-        private void cyan_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.Cyan;
-        }
-
-        private void darkCyan_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.DarkCyan;
-        }
-
-        private void lightSeaGreen_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.LightSeaGreen;
+            Button b = (Button)sender;
+            pen.Color = b.BackColor;
         }
 
         private void pencil_Click(object sender, EventArgs e)
         {
-            Consts.programMod = Consts.ProgramMode.draw;
+            if (choosedShape == Consts.Shapes.noShape)
+            {
+                MessageBox.Show("You can't paint without choosing a shape, pick one.", "paint");
+            }
+            else if (pen.Color == Color.Black)
+            {
+                MessageBox.Show("You can't paint without any color, pick one.", "paint");
+            }
+            else
+            {
+                Consts.programMod = Consts.ProgramMode.draw;
+            }
         }
 
         private void recyle_Click(object sender, EventArgs e)
         {
-            Consts.programMod = Consts.ProgramMode.clear;
             g.Clear(Color.OldLace);
-            //will do something TODO:
         }
 
         private void choose_Click(object sender, EventArgs e)
         {
             Consts.programMod = Consts.ProgramMode.choosing;
         }
-
     }
 }
 
@@ -178,9 +143,12 @@ namespace paint
 /*
  TODO:
 
--will set the paint area bounds
+-will set the paint area bounds++
 -create save system
--make menu choosable PrograMode.choosing
--make delete object from paint area or delete everything in paint area PrograMode.recyle
+-make menu choosable PrograMode.choosing??
+-make delete object from paint area or delete everything in paint area PrograMode.recyle++
+-panelBehaviour(), hand sign button task is uncertain.??
+-throw exeptions like color is not choosed via message boxes.++
+-panel1 buttons: show, which button choosed lastly for every groupBoxes.
 
  */
