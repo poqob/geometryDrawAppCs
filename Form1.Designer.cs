@@ -319,7 +319,7 @@ namespace paint
             this.heptagon.Size = new System.Drawing.Size(50, 52);
             this.heptagon.TabIndex = 5;
             this.heptagon.UseVisualStyleBackColor = true;
-            this.heptagon.Click += new System.EventHandler(this.heptagon_Click);
+            this.heptagon.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // rectangle
             // 
@@ -330,7 +330,7 @@ namespace paint
             this.rectangle.Size = new System.Drawing.Size(50, 52);
             this.rectangle.TabIndex = 2;
             this.rectangle.UseVisualStyleBackColor = true;
-            this.rectangle.Click += new System.EventHandler(this.button2_Click);
+            this.rectangle.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // circle
             // 
@@ -341,7 +341,7 @@ namespace paint
             this.circle.Size = new System.Drawing.Size(50, 52);
             this.circle.TabIndex = 6;
             this.circle.UseVisualStyleBackColor = true;
-            this.circle.Click += new System.EventHandler(this.circle_Click);
+            this.circle.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // triangle
             // 
@@ -352,7 +352,7 @@ namespace paint
             this.triangle.Size = new System.Drawing.Size(50, 52);
             this.triangle.TabIndex = 1;
             this.triangle.UseVisualStyleBackColor = true;
-            this.triangle.Click += new System.EventHandler(this.button1_Click);
+            this.triangle.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // label1
             // 
@@ -372,7 +372,7 @@ namespace paint
             this.pentagon.Size = new System.Drawing.Size(50, 52);
             this.pentagon.TabIndex = 3;
             this.pentagon.UseVisualStyleBackColor = true;
-            this.pentagon.Click += new System.EventHandler(this.button4_Click);
+            this.pentagon.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // hexagon
             // 
@@ -383,7 +383,7 @@ namespace paint
             this.hexagon.Size = new System.Drawing.Size(50, 52);
             this.hexagon.TabIndex = 4;
             this.hexagon.UseVisualStyleBackColor = true;
-            this.hexagon.Click += new System.EventHandler(this.button3_Click);
+            this.hexagon.Click += new System.EventHandler(this.shapeButtonsClick);
             // 
             // pictureBox1
             // 

@@ -2,7 +2,7 @@
 
 namespace paint
 {
-    interface IShape
+    public interface IShape
     {
 
         Point centerPoint { get; set; }

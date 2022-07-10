@@ -5,7 +5,7 @@ namespace paint
 {
     static class Consts
     {
-        public  enum Shapes { noShape = 0, ucgen = 3, dortgen = 4, besgen = 5, altıgen = 6, yedigen = 7, daire = 40 };
+        public  enum Shapes { noShape = 0, triangle = 3, rectangle = 4, pentagon = 5, hexagon = 6, heptagon = 7, circle = 40 };
 
         public enum ProgramMode { choosing = 0, stopDrawing = 1, draw = 2 };
 

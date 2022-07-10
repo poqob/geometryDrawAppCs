@@ -61,6 +61,7 @@ namespace paint
                     {
                         //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO 
                         Consts.programMod = Consts.ProgramMode.stopDrawing;
+
                         
                     }
                 }

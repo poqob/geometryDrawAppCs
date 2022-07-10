@@ -72,38 +72,6 @@ namespace paint
 
 
 
-        //panel1 buttons.
-
-        //hexagon button
-        private void button3_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.altıgen;
-        }
-        //triangle button
-        private void button1_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.ucgen;
-        }
-        //rectangle button
-        private void button2_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.dortgen;
-        }
-        //pentagon button
-        private void button4_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.besgen;
-        }
-        //heptagon button
-        private void heptagon_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.yedigen;
-        }
-        //circle button
-        private void circle_Click(object sender, EventArgs e)
-        {
-            choosedShape = Consts.Shapes.daire;
-        }
 
         private void colorChooseClick(object sender, EventArgs e)
         {
@@ -111,6 +79,40 @@ namespace paint
             pen.Color = b.BackColor;
         }
 
+        private void shapeButtonsClick(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            string name = b.Name;
+            switch (name)
+            {
+                case "triangle":
+                    choosedShape = Consts.Shapes.triangle;
+                    break;
+                case "rectangle":
+                    choosedShape = Consts.Shapes.rectangle;
+                    break;
+                case "pentagon":
+                    choosedShape = Consts.Shapes.pentagon;
+                    break;
+                case "hexagon":
+                    choosedShape = Consts.Shapes.hexagon;
+                    break;
+                case "heptagon":
+                    choosedShape = Consts.Shapes.heptagon;
+                    break;
+                case "circle":
+                    choosedShape = Consts.Shapes.circle;
+                    break;
+                default:
+                    choosedShape = Consts.Shapes.noShape;
+                    break;
+            }
+        }
+
+
+
+        //draw mode controller.
+        //throws exeptions while program is running. pick shape and pick color.
         private void pencil_Click(object sender, EventArgs e)
         {
             if (choosedShape == Consts.Shapes.noShape)
@@ -136,6 +138,8 @@ namespace paint
         {
             Consts.programMod = Consts.ProgramMode.choosing;
         }
+
+
     }
 }
 
