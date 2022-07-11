@@ -134,16 +134,24 @@ namespace paint
         private void recyle_Click(object sender, EventArgs e)
         {
             g.Clear(Color.OldLace);
+            PaintManagement.jsonCleaner();
         }
 
         private void choose_Click(object sender, EventArgs e)
         {
             Consts.programMod = Consts.ProgramMode.choosing;
-            PaintManagement.jsonPainter(ref g);
 
         }
 
+        private void openFileButton(object sender, EventArgs e)
+        {
+            PaintManagement.openPaintFromFolder(ref g);
+        }
 
+        private void saveFileButton(object sender, EventArgs e)
+        {
+            PaintManagement.savePaintToFolder();
+        }
     }
 }
 

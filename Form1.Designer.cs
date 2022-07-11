@@ -38,8 +38,8 @@ namespace paint
             this.pencil = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.save = new System.Windows.Forms.Button();
+            this.open = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.darkOrange = new System.Windows.Forms.Button();
             this.red = new System.Windows.Forms.Button();
@@ -138,8 +138,8 @@ namespace paint
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.button17);
-            this.groupBox3.Controls.Add(this.button19);
+            this.groupBox3.Controls.Add(this.save);
+            this.groupBox3.Controls.Add(this.open);
             this.groupBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox3.Location = new System.Drawing.Point(3, 451);
             this.groupBox3.Name = "groupBox3";
@@ -156,25 +156,27 @@ namespace paint
             this.label4.TabIndex = 19;
             this.label4.Text = "dosya  islemleri";
             // 
-            // button17
+            // save
             // 
-            this.button17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button17.BackgroundImage")));
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button17.Location = new System.Drawing.Point(79, 32);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(36, 39);
-            this.button17.TabIndex = 22;
-            this.button17.UseVisualStyleBackColor = true;
+            this.save.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("save.BackgroundImage")));
+            this.save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.save.Location = new System.Drawing.Point(79, 32);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(36, 39);
+            this.save.TabIndex = 22;
+            this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.saveFileButton);
             // 
-            // button19
+            // open
             // 
-            this.button19.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button19.BackgroundImage")));
-            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button19.Location = new System.Drawing.Point(30, 32);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(36, 39);
-            this.button19.TabIndex = 20;
-            this.button19.UseVisualStyleBackColor = true;
+            this.open.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("open.BackgroundImage")));
+            this.open.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.open.Location = new System.Drawing.Point(30, 32);
+            this.open.Name = "open";
+            this.open.Size = new System.Drawing.Size(36, 39);
+            this.open.TabIndex = 20;
+            this.open.UseVisualStyleBackColor = true;
+            this.open.Click += new System.EventHandler(this.openFileButton);
             // 
             // groupBox2
             // 
@@ -440,8 +442,8 @@ namespace paint
         private System.Windows.Forms.Button seaGreen;
         private System.Windows.Forms.Button red;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.Button open;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button recyle;
         private System.Windows.Forms.Button pencil;
