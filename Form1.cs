@@ -30,6 +30,7 @@ namespace paint
             g.SmoothingMode = SmoothingMode.AntiAlias;
             Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
             PaintManagement.tempJsonCreator();
+            PaintManagement.jsonCleaner(ref g);
         }
 
 
@@ -53,7 +54,10 @@ namespace paint
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
-            PaintManagement.jsonWriter(ref shape, pen.Color);
+            if (shape!=null){ 
+                PaintManagement.jsonWriter(ref shape, pen.Color);
+            }
+            
         }
 
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
@@ -133,8 +137,7 @@ namespace paint
 
         private void recyle_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.OldLace);
-            PaintManagement.jsonCleaner();
+            PaintManagement.jsonCleaner(ref g);
         }
 
         private void choose_Click(object sender, EventArgs e)
@@ -150,20 +153,20 @@ namespace paint
 
         private void saveFileButton(object sender, EventArgs e)
         {
-            PaintManagement.savePaintToFolder();
+            PaintManagement.savePaintToFolder(ref g);
         }
     }
 }
 
 
 /*
- TODO:
+ TODOs:
 
 -will set the paint area bounds++
--create save system
--make menu choosable PrograMode.choosing??
+-create save system++
+-make menu choosable PrograMode.choosing??--
 -make delete object from paint area or delete everything in paint area PrograMode.recyle++
--panelBehaviour(), hand sign button task is uncertain.??
+-panelBehaviour(), hand sign button task is uncertain.??-- i gonna make it back button or i leave it taskless.??
 -throw exeptions like color is not choosed via message boxes.++
 -panel1 buttons: show, which button choosed lastly for every groupBoxes.
 

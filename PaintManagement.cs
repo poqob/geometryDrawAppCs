@@ -27,7 +27,7 @@ namespace paint
         }
     }
 
-
+    //PaintManagement calss works for json style datas.
     public static class PaintManagement
     {
 
@@ -50,7 +50,8 @@ namespace paint
         {
             if (!File.Exists(tempJsonFilePath))
             {
-                File.Create(tempJsonFilePath);
+                FileStream fs = File.Create(tempJsonFilePath);
+                fs.Close();
             }
         }
 
@@ -64,37 +65,40 @@ namespace paint
             File.WriteAllText(tempJsonFilePath, json);
         }
 
-        //paint function works for json style datas.
+        //this function creates objects from json file and paint them into the canvas-paint area.
         public static void jsonPainter(ref Graphics g)
         {
             ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
-            for (int i = 0; i < jArray.Count; i++)
+            if (jArray != null)
             {
-                tempJsonObjects.Clear();
-                //making json string to objects
-                JsonModalObject jObject = JsonConvert.DeserializeObject<JsonModalObject>(jArray[i].ToString());
-                pen.Color = jObject.color;
-                //painting 
-                g.DrawPolygon(pen, jObject.shape.shapeCornerPoints);
-                g.FillPolygon(pen.Brush, jObject.shape.shapeCornerPoints);
-                //adding new shapes to our tempArrayList-tempJsonObjects
-                tempJsonObjects.Add(jObject);
+                jsonCleaner(ref g);
+
+                for (int i = 0; i < jArray.Count; i++)
+                {
+                    //making json string to objects
+                    JsonModalObject jObject = JsonConvert.DeserializeObject<JsonModalObject>(jArray[i].ToString());
+                    pen.Color = jObject.color;
+                    //painting 
+                    g.DrawPolygon(pen, jObject.shape.shapeCornerPoints);
+                    g.FillPolygon(pen.Brush, jObject.shape.shapeCornerPoints);
+                    //adding new shapes to our tempArrayList-tempJsonObjects
+                    tempJsonObjects.Add(jObject);
+                }
             }
+
         }
 
-        
-
-
+        //imports a painting from local folder.
         public static void openPaintFromFolder(ref Graphics g)
         {
-            //TODO:
-            //open saved json file with open file dialog
-            //turn into object that file json text.
-            //attempt the object to the  tempJsonObjects
-            //paint them to paint area.
+            //TODO: done
+            //open saved json file with open file dialog++
+            //turn into object that file json text.++
+            //attempt the object to the  tempJsonObjects++
+            //paint them to paint area.++
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.RestoreDirectory = true;
-            dialog.Title = "Browse foe Json Files";
+            dialog.Title = "Browse for Json Files";
             dialog.DefaultExt = "json";
             dialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
             dialog.CheckFileExists = true;
@@ -102,17 +106,19 @@ namespace paint
             DialogResult r = dialog.ShowDialog();
             if (r == DialogResult.OK)
             {
+                jsonCleaner(ref g);
                 //to obtain new shapes.
+                File.WriteAllText(tempJsonFilePath, File.ReadAllText(dialog.FileName));
                 json = File.ReadAllText(dialog.FileName);
-                File.WriteAllText(tempJsonFilePath, json);
+                MessageBox.Show((json == File.ReadAllText(dialog.FileName)).ToString());
                 //painting new shapes.
                 jsonPainter(ref g);
             }
 
         }
 
-
-        public static void savePaintToFolder()
+        //saves the current painting to choosed local folder.
+        public static void savePaintToFolder(ref Graphics g)
         {
             //save tempJsonfile to a folder.
             OpenFileDialog dialog = new OpenFileDialog();
@@ -128,23 +134,26 @@ namespace paint
                 File.WriteAllText(dialog.FileName, File.ReadAllText(tempJsonFilePath));
                 json = File.ReadAllText(dialog.FileName);
                 File.WriteAllText(tempJsonFilePath, json);
+                tempJsonObjects.Clear();
+                jsonCleaner(ref g);
             }
         }
 
 
         //clear the shape array and .jason file content's which is temp file.
-        public static void jsonCleaner()
+        public static void jsonCleaner(ref Graphics g)
         {
             tempJsonObjects.Clear();
             File.WriteAllText(tempJsonFilePath, "");
+            g.Clear(Color.OldLace);
+
         }
 
 
 
-        //Notes myself
-        //TODO: test the system with more shapes
-        //TODO: choosed button shadow will be added.
-        //TODO: look for program mode switch while painting without choosing draw mode.
+        //TODOS:
+        //TODO: test the system with more shapes.++
+        //TODO: look for program mode switch while painting without choosing draw mode.++
 
     }
 }
