@@ -1,13 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Reflection;
 using System.Collections;
 
 
@@ -32,6 +27,11 @@ namespace paint
     {
 
         //variables
+
+        static Label choosedShapeButton = new Label();
+        static Label choosedColorButton = new Label();
+        static Label choosedModeButton = new Label();
+
         private static Pen pen = new Pen(Color.Black, 2f);
 
         private static string json;
@@ -148,11 +148,62 @@ namespace paint
 
         }
 
+        //button backround paint functions. --aceleye geldi :D daha temiz yapardım.
+        public static void colorButtonBackround(ref Button b, ref GroupBox box)
+        {
+            Control[] a = box.Controls.Find(b.Name, true);
+            Point p = new Point(-3, -3);
+
+            p.X += a[0].Location.X;
+            p.Y += a[0].Location.Y;
+            choosedColorButton.Location = p;
+            choosedColorButton.Size = new Size(33, 38);
+            choosedColorButton.BackColor = Color.DarkGray;
 
 
+            box.Controls.Add(choosedColorButton);
+            choosedColorButton.BringToFront();
+            b.BringToFront();
+
+        }
+
+        public static void shapeButtonBackround(ref Button b, ref GroupBox box)
+        {
+            Control[] a = box.Controls.Find(b.Name, true);
+            Point p = new Point(-3, -3);
+
+            p.X += a[0].Location.X;
+            p.Y += a[0].Location.Y;
+            choosedShapeButton.Location = p;
+            choosedShapeButton.Size = new Size(44, 48);
+            choosedShapeButton.BackColor = Color.DarkGray;
+
+
+            box.Controls.Add(choosedShapeButton);
+            choosedShapeButton.BringToFront();
+            b.BringToFront();
+
+        }
+
+        public static void modeButtonBackround(ref Button b, ref GroupBox box)
+        {
+            Control[] a = box.Controls.Find(b.Name, true);
+            Point p = new Point(-3, -3);
+
+            p.X += a[0].Location.X;
+            p.Y += a[0].Location.Y;
+            choosedModeButton.Location = p;
+            choosedModeButton.Size = new Size(33, 38);
+            choosedModeButton.BackColor = Color.DarkGray;
+
+
+            box.Controls.Add(choosedModeButton);
+            choosedModeButton.BringToFront();
+            b.BringToFront();
+
+        }
         //TODOS:
         //TODO: test the system with more shapes.++
         //TODO: look for program mode switch while painting without choosing draw mode.++
-
     }
 }

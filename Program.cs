@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace paint
@@ -9,7 +6,7 @@ namespace paint
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Basic paint app, you can draw geometric shapes!!!
         /// </summary>
         [STAThread]
         static void Main()

@@ -15,6 +15,7 @@ namespace paint
         Consts.Shapes choosedShape;
         Pen pen;
         Graphics g;
+        
 
         //constructor for form1.
         public Form1()
@@ -90,6 +91,9 @@ namespace paint
         {
             Button b = (Button)sender;
             pen.Color = b.BackColor;
+            PaintManagement.colorButtonBackround(ref b,ref groupBox2);
+
+
         }
 
         //choosing which shape clicked.
@@ -121,6 +125,7 @@ namespace paint
                     choosedShape = Consts.Shapes.noShape;
                     break;
             }
+            PaintManagement.shapeButtonBackround(ref b,ref groupBox1);
         }
 
 
@@ -139,7 +144,10 @@ namespace paint
             }
             else
             {
+                Button b = (Button)sender;
                 Consts.programMod = Consts.ProgramMode.draw;
+                PaintManagement.modeButtonBackround(ref b,ref groupBox4);
+
             }
         }
 
@@ -150,7 +158,10 @@ namespace paint
 
         private void choose_Click(object sender, EventArgs e)
         {
+            Button b = (Button)sender;
             Consts.programMod = Consts.ProgramMode.choosing;
+            PaintManagement.modeButtonBackround(ref b,ref groupBox4);
+
         }
 
         private void openFileButton(object sender, EventArgs e)
