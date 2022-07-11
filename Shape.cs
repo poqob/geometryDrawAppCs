@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace paint
 {
-    class Polygon : IShape
+    public class Polygon : IShape
     {
         public Point centerPoint { get; set; }
         public Point endPoint { get; set; }
@@ -62,7 +62,7 @@ namespace paint
                         //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO 
                         Consts.programMod = Consts.ProgramMode.stopDrawing;
 
-                        
+
                     }
                 }
             }

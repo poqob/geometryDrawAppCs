@@ -10,7 +10,7 @@ namespace paint
         //variables
         Point startLocation;
         Point endLocation;
-        IShape shape;
+        Polygon shape;
         bool isMouseDown;
         Consts.Shapes choosedShape;
         Pen pen;
@@ -29,6 +29,7 @@ namespace paint
             g.CompositingQuality = CompositingQuality.HighQuality;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
+            PaintManagement.tempJsonCreator();
         }
 
 
@@ -52,6 +53,7 @@ namespace paint
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
+            PaintManagement.jsonWriter(ref shape, pen.Color);
         }
 
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
@@ -137,6 +139,8 @@ namespace paint
         private void choose_Click(object sender, EventArgs e)
         {
             Consts.programMod = Consts.ProgramMode.choosing;
+            PaintManagement.jsonPainter(ref g);
+
         }
 
 
