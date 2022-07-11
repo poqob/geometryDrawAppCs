@@ -31,8 +31,6 @@ namespace paint
     public static class PaintManagement
     {
 
-
-
         //variables
         private static Pen pen = new Pen(Color.Black, 2f);
 
@@ -44,53 +42,52 @@ namespace paint
 
         private static string workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
         private static string tempLoc = Directory.GetParent(workingDirectory).Parent.FullName;
-        private static string paintingsPath = Directory.GetParent(tempLoc).Parent.FullName + @"\paint\paintings\temp.json";
+        private static string tempJsonFilePath = Directory.GetParent(tempLoc).Parent.FullName + @"\paint\paintings\temp.json";
 
 
         //controls if temp.json was created or not.
         public static void tempJsonCreator()
         {
-            if (!File.Exists(paintingsPath))
+            if (!File.Exists(tempJsonFilePath))
             {
-                File.Create(paintingsPath);
+                File.Create(tempJsonFilePath);
             }
         }
 
-        //converts the graphical object input to json output.
+        //converts the graphical object input into the json output.
         public static void jsonWriter(ref Polygon shape, Color color)
         {
             tempJsonCreator(); //controlls if the temp.json file is exist.
             jsonModalObject = new JsonModalObject(shape, color);
             tempJsonObjects.Add(jsonModalObject);
             json = JsonConvert.SerializeObject(tempJsonObjects);
-            File.WriteAllText(paintingsPath, json);
+            File.WriteAllText(tempJsonFilePath, json);
         }
 
         //paint function works for json style datas.
         public static void jsonPainter(ref Graphics g)
         {
-            ArrayList a = JsonConvert.DeserializeObject<ArrayList>(json);
-            for (int i = 0; i < a.Count; i++)
+            ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
+            for (int i = 0; i < jArray.Count; i++)
             {
                 tempJsonObjects.Clear();
-                JsonModalObject b = JsonConvert.DeserializeObject<JsonModalObject>(a[i].ToString());
-                pen.Color = b.color;
-                g.DrawPolygon(pen, b.shape.shapeCornerPoints);
-                g.FillPolygon(pen.Brush, b.shape.shapeCornerPoints);
-                tempJsonObjects.Add(b);
+                //making json string to objects
+                JsonModalObject jObject = JsonConvert.DeserializeObject<JsonModalObject>(jArray[i].ToString());
+                pen.Color = jObject.color;
+                //painting 
+                g.DrawPolygon(pen, jObject.shape.shapeCornerPoints);
+                g.FillPolygon(pen.Brush, jObject.shape.shapeCornerPoints);
+                //adding new shapes to our tempArrayList-tempJsonObjects
+                tempJsonObjects.Add(jObject);
             }
         }
 
-        //clear the shape array and .jason file content which is temp file.
-        public static void jsonCleaner()
-        {
-            tempJsonObjects.Clear();
-            File.WriteAllText(paintingsPath, "");
-        }
+        
 
 
         public static void openPaintFromFolder(ref Graphics g)
         {
+            //TODO:
             //open saved json file with open file dialog
             //turn into object that file json text.
             //attempt the object to the  tempJsonObjects
@@ -105,7 +102,10 @@ namespace paint
             DialogResult r = dialog.ShowDialog();
             if (r == DialogResult.OK)
             {
+                //to obtain new shapes.
                 json = File.ReadAllText(dialog.FileName);
+                File.WriteAllText(tempJsonFilePath, json);
+                //painting new shapes.
                 jsonPainter(ref g);
             }
 
@@ -125,12 +125,19 @@ namespace paint
             DialogResult r = dialog.ShowDialog();
             if (r == DialogResult.OK)
             {
-                File.WriteAllText(dialog.FileName, File.ReadAllText(paintingsPath));
+                File.WriteAllText(dialog.FileName, File.ReadAllText(tempJsonFilePath));
+                json = File.ReadAllText(dialog.FileName);
+                File.WriteAllText(tempJsonFilePath, json);
             }
         }
 
 
-
+        //clear the shape array and .jason file content's which is temp file.
+        public static void jsonCleaner()
+        {
+            tempJsonObjects.Clear();
+            File.WriteAllText(tempJsonFilePath, "");
+        }
 
 
 
