@@ -107,11 +107,11 @@ namespace paint
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 1);
+            this.label3.Location = new System.Drawing.Point(10, 1);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 17);
+            this.label3.Size = new System.Drawing.Size(118, 17);
             this.label3.TabIndex = 15;
-            this.label3.Text = "sekil islemleri";
+            this.label3.Text = "shape operations";
             // 
             // choose
             // 
@@ -152,15 +152,15 @@ namespace paint
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(23, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 17);
+            this.label4.Size = new System.Drawing.Size(97, 17);
             this.label4.TabIndex = 19;
-            this.label4.Text = "dosya  islemleri";
+            this.label4.Text = "file operations";
             // 
             // save
             // 
             this.save.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("save.BackgroundImage")));
             this.save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.save.Location = new System.Drawing.Point(79, 32);
+            this.save.Location = new System.Drawing.Point(75, 32);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(36, 39);
             this.save.TabIndex = 22;
@@ -171,7 +171,7 @@ namespace paint
             // 
             this.open.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("open.BackgroundImage")));
             this.open.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.open.Location = new System.Drawing.Point(30, 32);
+            this.open.Location = new System.Drawing.Point(26, 32);
             this.open.Name = "open";
             this.open.Size = new System.Drawing.Size(36, 39);
             this.open.TabIndex = 20;
@@ -292,9 +292,9 @@ namespace paint
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(48, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 17);
+            this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "renkler";
+            this.label2.Text = "colors";
             // 
             // groupBox1
             // 
@@ -361,9 +361,9 @@ namespace paint
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(46, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.Size = new System.Drawing.Size(54, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "sekiller";
+            this.label1.Text = "shapes";
             // 
             // pentagon
             // 

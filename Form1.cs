@@ -16,7 +16,7 @@ namespace paint
         Pen pen;
         Graphics g;
 
-
+        //constructor for form1.
         public Form1()
         {
             InitializeComponent();
@@ -33,8 +33,14 @@ namespace paint
             PaintManagement.jsonCleaner(ref g);
         }
 
+        //destructor for form1.
+        ~Form1()
+        {
+            PaintManagement.jsonCleaner(ref g);
+        }
 
 
+        //painting
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown && endLocation.X != -1 && endLocation.Y != -1 && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
@@ -45,7 +51,7 @@ namespace paint
                 g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
         }
-
+        //stop painting
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
@@ -54,12 +60,13 @@ namespace paint
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
-            if (shape!=null){ 
+            if (shape != null)
+            {
                 PaintManagement.jsonWriter(ref shape, pen.Color);
             }
-            
-        }
 
+        }
+        //start painting
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
         {
             startLocation = e.Location;
@@ -78,13 +85,14 @@ namespace paint
 
 
 
-
+        //attemting button's color property to pen's color property.
         private void colorChooseClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             pen.Color = b.BackColor;
         }
 
+        //choosing which shape clicked.
         private void shapeButtonsClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
@@ -118,7 +126,7 @@ namespace paint
 
 
         //draw mode controller.
-        //throws exeptions while program is running. pick shape and pick color.
+        //throws ui exeptions while program is running. pick shape and pick color.
         private void pencil_Click(object sender, EventArgs e)
         {
             if (choosedShape == Consts.Shapes.noShape)
@@ -143,7 +151,6 @@ namespace paint
         private void choose_Click(object sender, EventArgs e)
         {
             Consts.programMod = Consts.ProgramMode.choosing;
-
         }
 
         private void openFileButton(object sender, EventArgs e)
@@ -157,7 +164,6 @@ namespace paint
         }
     }
 }
-
 
 /*
  TODOs:

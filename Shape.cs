@@ -3,6 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 namespace paint
 {
+    //Polygon() class which is can store all 2D shapes with more than 2 points.
+    //i added 6 shapes as built-in.
+    //Polygon() class can also generate circle with corners.
+    //the Circle definition: a polygon that becomes with endless corners.
     public class Polygon : IShape
     {
         public Point centerPoint { get; set; }
@@ -12,7 +16,7 @@ namespace paint
         public int distanceFromCenter { get; set; }
 
 
-
+        //Constructer
         public Polygon(int totalCornerNum, Point centerPoint, Point endPoint)
         {
             this.centerPoint = centerPoint;
@@ -20,7 +24,6 @@ namespace paint
             this.totalCornerNum = totalCornerNum;
             drawController();
         }
-
 
 
         public void distanceFromCenterCalculator()
@@ -42,10 +45,6 @@ namespace paint
             }
         }
 
-
-
-
-
         public void drawController()
         {
             distanceFromCenterCalculator();
@@ -59,10 +58,8 @@ namespace paint
                 {
                     if (Convert.ToInt32(Math.Sqrt(Math.Pow(Consts.boundPoints[i].X - shapeCornerPoints[j].X, 2) + Math.Pow(Consts.boundPoints[i].Y - shapeCornerPoints[j].Y, 2))) < 2)
                     {
-                        //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO 
+                        //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO ++
                         Consts.programMod = Consts.ProgramMode.stopDrawing;
-
-
                     }
                 }
             }

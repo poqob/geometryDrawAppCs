@@ -110,7 +110,6 @@ namespace paint
                 //to obtain new shapes.
                 File.WriteAllText(tempJsonFilePath, File.ReadAllText(dialog.FileName));
                 json = File.ReadAllText(dialog.FileName);
-                MessageBox.Show((json == File.ReadAllText(dialog.FileName)).ToString());
                 //painting new shapes.
                 jsonPainter(ref g);
             }
