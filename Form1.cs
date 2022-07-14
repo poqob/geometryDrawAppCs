@@ -15,7 +15,7 @@ namespace paint
         Consts.Shapes choosedShape;
         Pen pen;
         Graphics g;
-        
+
 
         //constructor for form1.
         public Form1()
@@ -37,7 +37,7 @@ namespace paint
         //destructor for form1.
         ~Form1()
         {
-            PaintManagement.jsonCleaner(ref g);
+            PaintManagement.jsonExplode();
         }
 
 
@@ -91,7 +91,7 @@ namespace paint
         {
             Button b = (Button)sender;
             pen.Color = b.BackColor;
-            PaintManagement.colorButtonBackround(ref b,ref groupBox2);
+            PaintManagement.colorButtonBackround(ref b, ref groupBox2);
 
 
         }
@@ -125,7 +125,7 @@ namespace paint
                     choosedShape = Consts.Shapes.noShape;
                     break;
             }
-            PaintManagement.shapeButtonBackround(ref b,ref groupBox1);
+            PaintManagement.shapeButtonBackround(ref b, ref groupBox1);
         }
 
 
@@ -146,7 +146,7 @@ namespace paint
             {
                 Button b = (Button)sender;
                 Consts.programMod = Consts.ProgramMode.draw;
-                PaintManagement.modeButtonBackround(ref b,ref groupBox4);
+                PaintManagement.modeButtonBackround(ref b, ref groupBox4);
 
             }
         }
@@ -160,7 +160,7 @@ namespace paint
         {
             Button b = (Button)sender;
             Consts.programMod = Consts.ProgramMode.choosing;
-            PaintManagement.modeButtonBackround(ref b,ref groupBox4);
+            PaintManagement.modeButtonBackround(ref b, ref groupBox4);
 
         }
 

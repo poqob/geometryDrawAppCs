@@ -40,9 +40,8 @@ namespace paint
 
         private static ArrayList tempJsonObjects = new ArrayList();
 
-        private static string workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        private static string tempLoc = Directory.GetParent(workingDirectory).Parent.FullName;
-        private static string tempJsonFilePath = Directory.GetParent(tempLoc).Parent.FullName + @"\paint\paintings\temp.json";
+
+        private static string tempJsonFilePath = AppDomain.CurrentDomain.BaseDirectory + "temp.json";
 
 
         //controls if temp.json was created or not.
@@ -148,6 +147,10 @@ namespace paint
 
         }
 
+        public static void jsonExplode()
+        {
+            File.Delete(tempJsonFilePath);
+        }
         //button backround paint functions. --aceleye geldi :D daha temiz yapardım.
         public static void colorButtonBackround(ref Button b, ref GroupBox box)
         {

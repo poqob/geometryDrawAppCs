@@ -456,4 +456,3 @@ namespace paint
         private System.Windows.Forms.Button circle;
     }
 }
-
