@@ -66,3 +66,10 @@ namespace paint
         }
     }
 }
+
+
+//TODO
+//add circle class.
+//add line class.
+//add free pen class.
+//gather them under IShape.

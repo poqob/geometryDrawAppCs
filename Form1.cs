@@ -15,7 +15,7 @@ namespace paint
         Consts.Shapes choosedShape;
         Pen pen;
         Graphics g;
-
+        Bitmap bm;
 
         //constructor for form1.
         public Form1()
@@ -23,15 +23,12 @@ namespace paint
             InitializeComponent();
             choosedShape = Consts.Shapes.noShape;
             Consts.programMod = Consts.ProgramMode.choosing;
-            endLocation.X = -1;
-            endLocation.Y = -1;
             pen = new Pen(Color.Black, 2f);
-            g = pictureBox1.CreateGraphics();
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
             PaintManagement.tempJsonCreator();
+            bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bm);
             PaintManagement.jsonCleaner(ref g);
+            pictureBox1.Image = bm;
         }
 
         //destructor for form1.
@@ -44,13 +41,11 @@ namespace paint
         //painting
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown && endLocation.X != -1 && endLocation.Y != -1 && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
-            {
-                endLocation = e.Location;
-                shape = new Polygon(((int)choosedShape), startLocation, endLocation);
-                g.DrawPolygon(pen, shape.shapeCornerPoints);
-                g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
-            }
+            endLocation = e.Location;
+            
+            pictureBox1.Refresh();
+
+
         }
         //stop painting
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -61,18 +56,27 @@ namespace paint
             {
                 Consts.programMod = Consts.ProgramMode.draw;
             }
+
             if (shape != null)
             {
                 PaintManagement.jsonWriter(ref shape, pen.Color);
             }
+            if (choosedShape != Consts.Shapes.noShape)
+            {
+                shape.endPoint = endLocation;
+                shape.drawController();
+                g.DrawPolygon(pen, shape.shapeCornerPoints);
+                g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
+            }
+
 
         }
         //start painting
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
         {
             startLocation = e.Location;
-            endLocation = e.Location;
-            //we only allow to draw with left mouse button.
+            Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
+            //i only allow you to draw with left mouse button.
             if (e.Button == MouseButtons.Left)
             {
                 isMouseDown = true;
@@ -81,6 +85,13 @@ namespace paint
             if (Consts.programMod == Consts.ProgramMode.stopDrawing)
             {
                 Consts.programMod = Consts.ProgramMode.draw;
+            }
+            if (isMouseDown && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
+            {
+                shape = new Polygon(((int)choosedShape), startLocation, endLocation);
+
+                //g.DrawPolygon(pen, shape.shapeCornerPoints);
+                //g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
         }
 
@@ -92,8 +103,6 @@ namespace paint
             Button b = (Button)sender;
             pen.Color = b.BackColor;
             PaintManagement.colorButtonBackround(ref b, ref groupBox2);
-
-
         }
 
         //choosing which shape clicked.
@@ -147,13 +156,12 @@ namespace paint
                 Button b = (Button)sender;
                 Consts.programMod = Consts.ProgramMode.draw;
                 PaintManagement.modeButtonBackround(ref b, ref groupBox4);
-
             }
         }
 
         private void recyle_Click(object sender, EventArgs e)
         {
-            PaintManagement.jsonCleaner(ref g);
+            // PaintManagement.jsonCleaner(ref g);
         }
 
         private void choose_Click(object sender, EventArgs e)
@@ -173,18 +181,39 @@ namespace paint
         {
             PaintManagement.savePaintToFolder(ref g);
         }
+
+        private void pictureBox1_Resize(object sender, EventArgs e)
+        {
+            g = pictureBox1.CreateGraphics();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics l = e.Graphics;
+            if (isMouseDown)
+            {
+                shape.endPoint = endLocation;
+                shape.drawController();
+                l.DrawPolygon(pen, shape.shapeCornerPoints);
+                l.FillPolygon(pen.Brush, shape.shapeCornerPoints);
+            }
+
+        }
     }
 }
 
-/*
- TODOs:
 
--will set the paint area bounds++
--create save system++
--make menu choosable PrograMode.choosing??--
--make delete object from paint area or delete everything in paint area PrograMode.recyle++
--panelBehaviour(), hand sign button task is uncertain.??-- i gonna make it back button or i leave it taskless.??
--throw exeptions like color is not choosed via message boxes.++
--panel1 buttons: show, which button choosed lastly for every groupBoxes.
+// TODO:
+//create selectable IShapes.
 
- */
+
+
+
+
+
+
+//STATUS:
+//working on bitmaps, may i found a way to save a selectable shape in it.
+
+
+ 

@@ -210,3 +210,8 @@ namespace paint
         //TODO: look for program mode switch while painting without choosing draw mode.++
     }
 }
+
+
+//TODO:
+//arange page layout according to imported paint.
+//optimise bound dedector alghorithm.

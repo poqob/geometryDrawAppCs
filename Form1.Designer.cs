@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Windows.Forms;
+
 namespace paint
 {
     partial class Form1
@@ -60,6 +63,7 @@ namespace paint
             this.pentagon = new System.Windows.Forms.Button();
             this.hexagon = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -75,9 +79,10 @@ namespace paint
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Location = new System.Drawing.Point(704, -1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(709, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(144, 536);
+            this.panel1.Size = new System.Drawing.Size(144, 618);
             this.panel1.TabIndex = 0;
             // 
             // groupBox4
@@ -390,20 +395,23 @@ namespace paint
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.OldLace;
-            this.pictureBox1.Location = new System.Drawing.Point(1, -1);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(708, 536);
+            this.pictureBox1.Size = new System.Drawing.Size(708, 618);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown_1);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 533);
+            this.ClientSize = new System.Drawing.Size(853, 618);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
@@ -421,6 +429,8 @@ namespace paint
             this.ResumeLayout(false);
 
         }
+
+        
 
         #endregion
 
@@ -454,5 +464,6 @@ namespace paint
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button heptagon;
         private System.Windows.Forms.Button circle;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
