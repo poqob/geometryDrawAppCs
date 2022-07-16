@@ -15,13 +15,15 @@ namespace paint
         public PointF[] shapeCornerPoints { get; set; }
         public int distanceFromCenter { get; set; }
         private Label label;
+        private Color color;
 
         //Constructer
-        public Polygon(int totalCornerNum, Point centerPoint, Point endPoint)
+        public Polygon(int totalCornerNum, Point centerPoint, Point endPoint, Color color)
         {
             this.centerPoint = centerPoint;
             this.endPoint = endPoint;
             this.totalCornerNum = totalCornerNum;
+            this.color = color;
             drawController();
         }
 
@@ -71,7 +73,35 @@ namespace paint
             label.BackColor = Color.FromArgb(100, Color.Gray);
             label.Click += delegate (object sender, EventArgs e)
             {
-                label.Dispose();
+                //choose color button 
+                PaintManagement.colorButtonBackroundFromChooseOperation(color);
+                //choose shape button 
+                string shape;
+                if (true)
+                {
+                    switch (totalCornerNum)
+                    {
+                        case 3:
+                            shape = "triangle";
+                            break;
+                        case 4:
+                            shape = "rectangle";
+                            break;
+                        case 5:
+                            shape = "pentagon";
+                            break;
+                        case 6:
+                            shape = "hexagon";
+                            break;
+                        case 7:
+                            shape = "heptagon";
+                            break;
+                        default:
+                            shape = "circle";
+                            break;
+                    }
+                }
+                PaintManagement.shapeButtonBackroundFromChooseOperation(shape);
             };
             label.Location = centerPoint;
             label.Width = 80;

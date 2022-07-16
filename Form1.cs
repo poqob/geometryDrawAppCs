@@ -88,7 +88,7 @@ namespace paint
             }
             if (isMouseDown && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
             {
-                shape = new Polygon(((int)choosedShape), startLocation, endLocation);
+                shape = new Polygon(((int)choosedShape), startLocation, endLocation, pen.Color);
             }
         }
 
@@ -99,7 +99,7 @@ namespace paint
         {
             Button b = (Button)sender;
             pen.Color = b.BackColor;
-            PaintManagement.colorButtonBackround(ref b, ref groupBox2);
+            PaintManagement.colorButtonBackround(b, groupBox2);
         }
 
         //choosing which shape clicked.
@@ -131,7 +131,7 @@ namespace paint
                     choosedShape = Consts.Shapes.noShape;
                     break;
             }
-            PaintManagement.shapeButtonBackround(ref b, ref groupBox1);
+            PaintManagement.shapeButtonBackround(b, groupBox1);
         }
 
 
@@ -167,6 +167,19 @@ namespace paint
             {
                 lb.Dispose();
             }
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Dispose();
+            }
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Dispose();
+            }
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Dispose();
+            }
+
             PaintManagement.jsonCleaner(ref g);
             pictureBox1.Refresh();
 
@@ -218,7 +231,7 @@ namespace paint
 
 
 // TODO:
-//create selectable IShapes.
+//create selectable IShapes-Polygons.++
 
 
 

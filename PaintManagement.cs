@@ -152,7 +152,7 @@ namespace paint
             File.Delete(tempJsonFilePath);
         }
         //button backround paint functions. --aceleye geldi :D daha temiz yapardım.
-        public static void colorButtonBackround(ref Button b, ref GroupBox box)
+        public static void colorButtonBackround(Button b, GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
             Point p = new Point(-3, -3);
@@ -170,7 +170,7 @@ namespace paint
 
         }
 
-        public static void shapeButtonBackround(ref Button b, ref GroupBox box)
+        public static void shapeButtonBackround(Button b, GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
             Point p = new Point(-3, -3);
@@ -188,6 +188,8 @@ namespace paint
 
         }
 
+
+
         public static void modeButtonBackround(ref Button b, ref GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
@@ -203,6 +205,27 @@ namespace paint
             choosedModeButtonBackround.BringToFront();
             b.BringToFront();
 
+        }
+        public static void shapeButtonBackroundFromChooseOperation(string shape)
+        {
+            Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox1", true);
+            GroupBox box = (GroupBox)boxT[0];
+            //button
+            Control[] buttonT = box.Controls.Find(shape, true);
+            Button button = (Button)buttonT[0];
+
+            PaintManagement.shapeButtonBackround(button, box);
+
+        }
+        public static void colorButtonBackroundFromChooseOperation(Color color)
+        {
+            Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox2", true);
+            GroupBox box = (GroupBox)boxT[0];
+            //button
+            Control[] buttonT = box.Controls.Find(color.Name, true);
+            Button button = (Button)buttonT[0];
+
+            PaintManagement.colorButtonBackround(button, box);
         }
     }
 }
