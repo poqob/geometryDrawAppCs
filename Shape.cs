@@ -14,7 +14,7 @@ namespace paint
         public int totalCornerNum { get; set; }
         public PointF[] shapeCornerPoints { get; set; }
         public int distanceFromCenter { get; set; }
-
+        private Label label;
 
         //Constructer
         public Polygon(int totalCornerNum, Point centerPoint, Point endPoint)
@@ -64,6 +64,21 @@ namespace paint
                 }
             }
         }
+
+        public void selectablePart(ref PictureBox c)
+        {
+            label = new Label();
+            label.BackColor = Color.FromArgb(100, Color.Gray);
+            label.Click += delegate (object sender, EventArgs e)
+            {
+                label.Dispose();
+            };
+            label.Location = centerPoint;
+            label.Width = 80;
+            label.Height = 80;
+            label.Visible = false;
+            c.Controls.Add(label);
+        }
     }
 }
 
@@ -73,3 +88,4 @@ namespace paint
 //add line class.
 //add free pen class.
 //gather them under IShape.
+//will change the shapes label visibility accord,ng to created shape.

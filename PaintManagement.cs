@@ -28,9 +28,9 @@ namespace paint
 
         //variables
 
-        static Label choosedShapeButton = new Label();
-        static Label choosedColorButton = new Label();
-        static Label choosedModeButton = new Label();
+        static Label choosedShapeButtonBackround = new Label();
+        static Label choosedColorButtonBackround = new Label();
+        static Label choosedModeButtonBackround = new Label();
 
         private static Pen pen = new Pen(Color.Black, 2f);
 
@@ -159,13 +159,13 @@ namespace paint
 
             p.X += a[0].Location.X;
             p.Y += a[0].Location.Y;
-            choosedColorButton.Location = p;
-            choosedColorButton.Size = new Size(33, 38);
-            choosedColorButton.BackColor = Color.DarkGray;
+            choosedColorButtonBackround.Location = p;
+            choosedColorButtonBackround.Size = new Size(33, 38);
+            choosedColorButtonBackround.BackColor = Color.DarkGray;
 
 
-            box.Controls.Add(choosedColorButton);
-            choosedColorButton.BringToFront();
+            box.Controls.Add(choosedColorButtonBackround);
+            choosedColorButtonBackround.BringToFront();
             b.BringToFront();
 
         }
@@ -177,13 +177,13 @@ namespace paint
 
             p.X += a[0].Location.X;
             p.Y += a[0].Location.Y;
-            choosedShapeButton.Location = p;
-            choosedShapeButton.Size = new Size(44, 48);
-            choosedShapeButton.BackColor = Color.DarkGray;
+            choosedShapeButtonBackround.Location = p;
+            choosedShapeButtonBackround.Size = new Size(44, 48);
+            choosedShapeButtonBackround.BackColor = Color.DarkGray;
 
 
-            box.Controls.Add(choosedShapeButton);
-            choosedShapeButton.BringToFront();
+            box.Controls.Add(choosedShapeButtonBackround);
+            choosedShapeButtonBackround.BringToFront();
             b.BringToFront();
 
         }
@@ -195,19 +195,15 @@ namespace paint
 
             p.X += a[0].Location.X;
             p.Y += a[0].Location.Y;
-            choosedModeButton.Location = p;
-            choosedModeButton.Size = new Size(33, 38);
-            choosedModeButton.BackColor = Color.DarkGray;
+            choosedModeButtonBackround.Location = p;
+            choosedModeButtonBackround.Size = new Size(33, 38);
+            choosedModeButtonBackround.BackColor = Color.DarkGray;
 
-
-            box.Controls.Add(choosedModeButton);
-            choosedModeButton.BringToFront();
+            box.Controls.Add(choosedModeButtonBackround);
+            choosedModeButtonBackround.BringToFront();
             b.BringToFront();
 
         }
-        //TODOS:
-        //TODO: test the system with more shapes.++
-        //TODO: look for program mode switch while painting without choosing draw mode.++
     }
 }
 

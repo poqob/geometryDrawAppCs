@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace paint
 {
@@ -15,6 +16,7 @@ namespace paint
         Consts.Shapes choosedShape;
         Pen pen;
         Graphics g;
+        Graphics l;
         Bitmap bm;
 
         //constructor for form1.
@@ -42,31 +44,29 @@ namespace paint
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
-            
             pictureBox1.Refresh();
-
-
         }
         //stop painting
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             endLocation = e.Location;
             isMouseDown = false;
-            if (Consts.programMod == Consts.ProgramMode.stopDrawing)
+            /*if (Consts.programMod == Consts.ProgramMode.stopDrawing)
             {
                 Consts.programMod = Consts.ProgramMode.draw;
-            }
+            }*/
 
             if (shape != null)
             {
                 PaintManagement.jsonWriter(ref shape, pen.Color);
             }
-            if (choosedShape != Consts.Shapes.noShape)
+            if (choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
             {
                 shape.endPoint = endLocation;
                 shape.drawController();
                 g.DrawPolygon(pen, shape.shapeCornerPoints);
                 g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
+                shape.selectablePart(ref pictureBox1);
             }
 
 
@@ -89,9 +89,6 @@ namespace paint
             if (isMouseDown && choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
             {
                 shape = new Polygon(((int)choosedShape), startLocation, endLocation);
-
-                //g.DrawPolygon(pen, shape.shapeCornerPoints);
-                //g.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
         }
 
@@ -157,11 +154,22 @@ namespace paint
                 Consts.programMod = Consts.ProgramMode.draw;
                 PaintManagement.modeButtonBackround(ref b, ref groupBox4);
             }
+            //IShapes-Polygonses controller make them unvisible.
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Visible = false;
+            }
         }
 
         private void recyle_Click(object sender, EventArgs e)
         {
-            // PaintManagement.jsonCleaner(ref g);
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Dispose();
+            }
+            PaintManagement.jsonCleaner(ref g);
+            pictureBox1.Refresh();
+
         }
 
         private void choose_Click(object sender, EventArgs e)
@@ -169,6 +177,13 @@ namespace paint
             Button b = (Button)sender;
             Consts.programMod = Consts.ProgramMode.choosing;
             PaintManagement.modeButtonBackround(ref b, ref groupBox4);
+            //IShapes-Polygonses controller make them visible.
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Visible = true;
+            }
+
+            //shape.selectablePart(ref this.pictureBox1);
 
         }
 
@@ -189,15 +204,14 @@ namespace paint
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics l = e.Graphics;
-            if (isMouseDown)
+            l = e.Graphics;
+            if (isMouseDown && Consts.programMod == Consts.ProgramMode.draw)
             {
                 shape.endPoint = endLocation;
                 shape.drawController();
                 l.DrawPolygon(pen, shape.shapeCornerPoints);
                 l.FillPolygon(pen.Brush, shape.shapeCornerPoints);
             }
-
         }
     }
 }
@@ -214,6 +228,6 @@ namespace paint
 
 //STATUS:
 //working on bitmaps, may i found a way to save a selectable shape in it.
+//**may i use label as container because it has click property.++
 
 
- 
