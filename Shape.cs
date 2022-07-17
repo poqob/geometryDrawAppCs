@@ -14,7 +14,7 @@ namespace paint
         public int totalCornerNum { get; set; }
         public PointF[] shapeCornerPoints { get; set; }
         public int distanceFromCenter { get; set; }
-        private Label label;
+        private Label selectableArea;
         private Color color;
 
         //Constructer
@@ -60,8 +60,8 @@ namespace paint
                 {
                     if (Convert.ToInt32(Math.Sqrt(Math.Pow(Consts.boundPoints[i].X - shapeCornerPoints[j].X, 2) + Math.Pow(Consts.boundPoints[i].Y - shapeCornerPoints[j].Y, 2))) < 2)
                     {
-                        //send shape data to json file for drawing process and dispose current shape from the paint are. <--TODO ++
                         Consts.programMod = Consts.ProgramMode.stopDrawing;
+
                     }
                 }
             }
@@ -69,12 +69,12 @@ namespace paint
 
         public void selectablePart(ref PictureBox c)
         {
-            label = new Label();
-            label.BackColor = Color.FromArgb(100, Color.Gray);
-            label.Click += delegate (object sender, EventArgs e)
+            selectableArea = new Label();
+            selectableArea.BackColor = Color.FromArgb(100, Color.Gray);
+            selectableArea.Click += delegate (object sender, EventArgs e)
             {
                 //choose color button 
-                PaintManagement.colorButtonBackroundFromChooseOperation(color);
+                ButtonManager.colorButtonBackroundFromChooseOperation(color);
                 //choose shape button 
                 string shape;
                 if (true)
@@ -101,13 +101,15 @@ namespace paint
                             break;
                     }
                 }
-                PaintManagement.shapeButtonBackroundFromChooseOperation(shape);
+                ButtonManager.shapeButtonBackroundFromChooseOperation(shape);
             };
-            label.Location = centerPoint;
-            label.Width = 80;
-            label.Height = 80;
-            label.Visible = false;
-            c.Controls.Add(label);
+            Point p = new Point(centerPoint.X - distanceFromCenter/4-15, centerPoint.Y - distanceFromCenter/4-15);
+
+            selectableArea.Location = p;
+            selectableArea.Width = (int)(distanceFromCenter * 1.2);
+            selectableArea.Height = (int)(distanceFromCenter*1.2);
+            selectableArea.Visible = false;
+            c.Controls.Add(selectableArea);
         }
     }
 }

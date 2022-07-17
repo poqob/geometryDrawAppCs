@@ -15,6 +15,8 @@ namespace paint
         public static Point[] boundPoints;
         //program mode.
         public static ProgramMode programMod;
+        public static Shapes choosedShape;
+        public static Pen pen;
 
 
 

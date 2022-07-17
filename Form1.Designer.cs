@@ -74,7 +74,7 @@ namespace paint
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BackColor = System.Drawing.Color.Tan;
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
@@ -92,9 +92,9 @@ namespace paint
             this.groupBox4.Controls.Add(this.choose);
             this.groupBox4.Controls.Add(this.pencil);
             this.groupBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox4.Location = new System.Drawing.Point(5, 377);
+            this.groupBox4.Location = new System.Drawing.Point(5, 364);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(141, 68);
+            this.groupBox4.Size = new System.Drawing.Size(141, 93);
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
             // 
@@ -146,7 +146,7 @@ namespace paint
             this.groupBox3.Controls.Add(this.save);
             this.groupBox3.Controls.Add(this.open);
             this.groupBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox3.Location = new System.Drawing.Point(3, 451);
+            this.groupBox3.Location = new System.Drawing.Point(3, 463);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(143, 83);
             this.groupBox3.TabIndex = 2;
@@ -196,9 +196,9 @@ namespace paint
             this.groupBox2.Controls.Add(this.darkCyan);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox2.Location = new System.Drawing.Point(3, 221);
+            this.groupBox2.Location = new System.Drawing.Point(5, 208);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(141, 153);
+            this.groupBox2.Size = new System.Drawing.Size(141, 163);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             // 

@@ -4,11 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Collections;
-
-
 namespace paint
 {
-
 
     //Modal class
     public class JsonModalObject
@@ -22,15 +19,13 @@ namespace paint
         }
     }
 
-    //PaintManagement calss works for json style datas.
-    public static class PaintManagement
+    class JsonOperations
     {
+
 
         //variables
 
-        static Label choosedShapeButtonBackround = new Label();
-        static Label choosedColorButtonBackround = new Label();
-        static Label choosedModeButtonBackround = new Label();
+
 
         private static Pen pen = new Pen(Color.Black, 2f);
 
@@ -90,11 +85,6 @@ namespace paint
         //imports a painting from local folder.
         public static void openPaintFromFolder(ref Graphics g)
         {
-            //TODO: done
-            //open saved json file with open file dialog++
-            //turn into object that file json text.++
-            //attempt the object to the  tempJsonObjects++
-            //paint them to paint area.++
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.RestoreDirectory = true;
             dialog.Title = "Browse for Json Files";
@@ -151,86 +141,6 @@ namespace paint
         {
             File.Delete(tempJsonFilePath);
         }
-        //button backround paint functions. --aceleye geldi :D daha temiz yapardım.
-        public static void colorButtonBackround(Button b, GroupBox box)
-        {
-            Control[] a = box.Controls.Find(b.Name, true);
-            Point p = new Point(-3, -3);
 
-            p.X += a[0].Location.X;
-            p.Y += a[0].Location.Y;
-            choosedColorButtonBackround.Location = p;
-            choosedColorButtonBackround.Size = new Size(33, 38);
-            choosedColorButtonBackround.BackColor = Color.DarkGray;
-
-
-            box.Controls.Add(choosedColorButtonBackround);
-            choosedColorButtonBackround.BringToFront();
-            b.BringToFront();
-
-        }
-
-        public static void shapeButtonBackround(Button b, GroupBox box)
-        {
-            Control[] a = box.Controls.Find(b.Name, true);
-            Point p = new Point(-3, -3);
-
-            p.X += a[0].Location.X;
-            p.Y += a[0].Location.Y;
-            choosedShapeButtonBackround.Location = p;
-            choosedShapeButtonBackround.Size = new Size(44, 48);
-            choosedShapeButtonBackround.BackColor = Color.DarkGray;
-
-
-            box.Controls.Add(choosedShapeButtonBackround);
-            choosedShapeButtonBackround.BringToFront();
-            b.BringToFront();
-
-        }
-
-
-
-        public static void modeButtonBackround(ref Button b, ref GroupBox box)
-        {
-            Control[] a = box.Controls.Find(b.Name, true);
-            Point p = new Point(-3, -3);
-
-            p.X += a[0].Location.X;
-            p.Y += a[0].Location.Y;
-            choosedModeButtonBackround.Location = p;
-            choosedModeButtonBackround.Size = new Size(33, 38);
-            choosedModeButtonBackround.BackColor = Color.DarkGray;
-
-            box.Controls.Add(choosedModeButtonBackround);
-            choosedModeButtonBackround.BringToFront();
-            b.BringToFront();
-
-        }
-        public static void shapeButtonBackroundFromChooseOperation(string shape)
-        {
-            Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox1", true);
-            GroupBox box = (GroupBox)boxT[0];
-            //button
-            Control[] buttonT = box.Controls.Find(shape, true);
-            Button button = (Button)buttonT[0];
-
-            PaintManagement.shapeButtonBackround(button, box);
-
-        }
-        public static void colorButtonBackroundFromChooseOperation(Color color)
-        {
-            Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox2", true);
-            GroupBox box = (GroupBox)boxT[0];
-            //button
-            Control[] buttonT = box.Controls.Find(color.Name, true);
-            Button button = (Button)buttonT[0];
-
-            PaintManagement.colorButtonBackround(button, box);
-        }
     }
 }
-
-
-//TODO:
-//arange page layout according to imported paint.
-//optimise bound dedector alghorithm.
