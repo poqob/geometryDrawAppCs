@@ -67,6 +67,7 @@ namespace paint
             }
         }
 
+        //label creator
         public void selectablePart(ref PictureBox c)
         {
             selectableArea = new Label();
@@ -103,11 +104,12 @@ namespace paint
                 }
                 ButtonManager.shapeButtonBackroundFromChooseOperation(shape);
             };
-            Point p = new Point(centerPoint.X - distanceFromCenter / 4 - 15, centerPoint.Y - distanceFromCenter / 4 - 15);
+            Point p = new Point(centerPoint.X - distanceFromCenter / 2, centerPoint.Y - distanceFromCenter / 2);
 
             selectableArea.Location = p;
             selectableArea.Width = (int)(distanceFromCenter * 1.2);
             selectableArea.Height = (int)(distanceFromCenter * 1.2);
+
             selectableArea.Visible = false;
             c.Controls.Add(selectableArea);
             selectableArea.BringToFront();

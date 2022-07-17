@@ -29,6 +29,8 @@ namespace paint
 
         private static Pen pen = new Pen(Color.Black, 2f);
 
+        private static FileStream fs;
+
         private static string json;
 
         private static JsonModalObject jsonModalObject;
@@ -44,7 +46,7 @@ namespace paint
         {
             if (!File.Exists(tempJsonFilePath))
             {
-                FileStream fs = File.Create(tempJsonFilePath);
+                fs = File.Create(tempJsonFilePath);
                 fs.Close();
             }
         }
@@ -136,11 +138,16 @@ namespace paint
             g.Clear(Color.OldLace);
 
         }
-
+        //Destructor for json file.
         public static void jsonExplode()
         {
+            fs.Dispose();
             File.Delete(tempJsonFilePath);
         }
 
     }
 }
+
+//todo:
+//write label objects as well.
+//rearange label objects location.++
