@@ -20,9 +20,11 @@ namespace paint
         public Form1()
         {
             InitializeComponent();
-            Consts.choosedShape = Consts.Shapes.noShape;
-            Consts.programMod = Consts.ProgramMode.choosing;
-            Consts.pen = new Pen(Color.Black, 2f);
+            this.Text = "Paint application";
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            Variables.choosedShape = Variables.Shapes.noShape;
+            Variables.programMod = Variables.ProgramMode.choosing;
+            Variables.pen = new Pen(Color.Black, 2f);
             JsonOperations.tempJsonCreator();
             bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bm);
@@ -52,15 +54,15 @@ namespace paint
 
 
 
-            if (Consts.choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
+            if (Variables.choosedShape != Variables.Shapes.noShape && Variables.programMod == Variables.ProgramMode.draw)
             {
                 shape.endPoint = endLocation;
                 shape.drawController();
-                g.DrawPolygon(Consts.pen, shape.shapeCornerPoints);
-                g.FillPolygon(Consts.pen.Brush, shape.shapeCornerPoints);
+                g.DrawPolygon(Variables.pen, shape.shapeCornerPoints);
+                g.FillPolygon(Variables.pen.Brush, shape.shapeCornerPoints);
                 shape.selectablePart(ref pictureBox1);
             }
-            if (shape != null && Consts.programMod != Consts.ProgramMode.stopDrawing)
+            if (shape != null && Variables.programMod != Variables.ProgramMode.stopDrawing)
             {
                 JsonOperations.jsonWriter(ref shape);
             }
@@ -70,20 +72,20 @@ namespace paint
         private void pictureBox1_MouseDown_1(object sender, MouseEventArgs e)
         {
             startLocation = e.Location;
-            Consts.paintAreaBoundPointsDedector(pictureBox1.Size);
+            Variables.paintAreaBoundPointsDedector(pictureBox1.Size);
             //i only allow you to draw with left mouse button.
             if (e.Button == MouseButtons.Left)
             {
                 isMouseDown = true;
             }
 
-            if (Consts.programMod == Consts.ProgramMode.stopDrawing)
+            if (Variables.programMod == Variables.ProgramMode.stopDrawing)
             {
-                Consts.programMod = Consts.ProgramMode.draw;
+                Variables.programMod = Variables.ProgramMode.draw;
             }
-            if (isMouseDown && Consts.choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
+            if (isMouseDown && Variables.choosedShape != Variables.Shapes.noShape && Variables.programMod == Variables.ProgramMode.draw)
             {
-                shape = new Polygon(((int)Consts.choosedShape), startLocation, endLocation, Consts.pen.Color);
+                shape = new Polygon(((int)Variables.choosedShape), startLocation, endLocation, Variables.pen.Color);
             }
         }
 
@@ -93,7 +95,7 @@ namespace paint
         private void colorChooseClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            Consts.pen.Color = b.BackColor;
+            Variables.pen.Color = b.BackColor;
             ButtonManager.colorButtonBackround(b, groupBox2);
         }
 
@@ -105,25 +107,25 @@ namespace paint
             switch (name)
             {
                 case "triangle":
-                    Consts.choosedShape = Consts.Shapes.triangle;
+                    Variables.choosedShape = Variables.Shapes.triangle;
                     break;
                 case "rectangle":
-                    Consts.choosedShape = Consts.Shapes.rectangle;
+                    Variables.choosedShape = Variables.Shapes.rectangle;
                     break;
                 case "pentagon":
-                    Consts.choosedShape = Consts.Shapes.pentagon;
+                    Variables.choosedShape = Variables.Shapes.pentagon;
                     break;
                 case "hexagon":
-                    Consts.choosedShape = Consts.Shapes.hexagon;
+                    Variables.choosedShape = Variables.Shapes.hexagon;
                     break;
                 case "heptagon":
-                    Consts.choosedShape = Consts.Shapes.heptagon;
+                    Variables.choosedShape = Variables.Shapes.heptagon;
                     break;
                 case "circle":
-                    Consts.choosedShape = Consts.Shapes.circle;
+                    Variables.choosedShape = Variables.Shapes.circle;
                     break;
                 default:
-                    Consts.choosedShape = Consts.Shapes.noShape;
+                    Variables.choosedShape = Variables.Shapes.noShape;
                     break;
             }
             ButtonManager.shapeButtonBackround(b, groupBox1);
@@ -135,18 +137,18 @@ namespace paint
         //throws ui exeptions while program is running. pick shape and pick color.
         private void pencil_Click(object sender, EventArgs e)
         {
-            if (Consts.choosedShape == Consts.Shapes.noShape)
+            if (Variables.choosedShape == Variables.Shapes.noShape)
             {
                 MessageBox.Show("You can't paint without choosing a shape, pick one.", "paint");
             }
-            else if (Consts.pen.Color == Color.Black)
+            else if (Variables.pen.Color == Color.Black)
             {
                 MessageBox.Show("You can't paint without any color, pick one.", "paint");
             }
             else
             {
                 Button b = (Button)sender;
-                Consts.programMod = Consts.ProgramMode.draw;
+                Variables.programMod = Variables.ProgramMode.draw;
                 ButtonManager.modeButtonBackround(ref b, ref groupBox4);
             }
             //IShapes-Polygonses controller make them unvisible.
@@ -159,22 +161,26 @@ namespace paint
         //clears all canvas-painting area.
         private void recyle_Click(object sender, EventArgs e)
         {
-            foreach (Label lb in pictureBox1.Controls)
+            do
             {
-                lb.Dispose();
-            }
-            foreach (Label lb in pictureBox1.Controls)
-            {
-                lb.Dispose();
-            }
-            foreach (Label lb in pictureBox1.Controls)
-            {
-                lb.Dispose();
-            }
-            foreach (Label lb in pictureBox1.Controls)
-            {
-                lb.Dispose();
-            }
+                foreach (Label lb in pictureBox1.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pictureBox1.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pictureBox1.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pictureBox1.Controls)
+                {
+                    lb.Dispose();
+                }
+            } while (pictureBox1.Controls.Count!=0);
+            
 
             JsonOperations.jsonCleaner(ref g);
             pictureBox1.Refresh();
@@ -185,7 +191,7 @@ namespace paint
         private void choose_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            Consts.programMod = Consts.ProgramMode.choosing;
+            Variables.programMod = Variables.ProgramMode.choosing;
             ButtonManager.modeButtonBackround(ref b, ref groupBox4);
             //IShapes-Polygonses controller make them visible.
             foreach (Label lb in pictureBox1.Controls)
@@ -203,7 +209,8 @@ namespace paint
 
         private void saveFileButton(object sender, EventArgs e)
         {
-            JsonOperations.savePaintToFolder(ref g);
+            JsonOperations.savePaintToFolder(ref g,ref pictureBox1);
+            pictureBox1.Refresh();
         }
 
         private void pictureBox1_Resize(object sender, EventArgs e)
@@ -217,12 +224,12 @@ namespace paint
         {
             l = e.Graphics;
             l.SmoothingMode = SmoothingMode.AntiAlias;
-            if (isMouseDown && Consts.programMod == Consts.ProgramMode.draw)
+            if (isMouseDown && Variables.programMod == Variables.ProgramMode.draw)
             {
                 shape.endPoint = endLocation;
                 shape.drawController();
-                l.DrawPolygon(Consts.pen, shape.shapeCornerPoints);
-                l.FillPolygon(Consts.pen.Brush, shape.shapeCornerPoints);
+                l.DrawPolygon(Variables.pen, shape.shapeCornerPoints);
+                l.FillPolygon(Variables.pen.Brush, shape.shapeCornerPoints);
             }
         }
     }

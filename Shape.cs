@@ -17,7 +17,7 @@ namespace paint
         private Label selectableArea;
         public Color color;
 
-        //Constructer
+        //Constructer for Polygon.
         public Polygon(int totalCornerNum, Point centerPoint, Point endPoint, Color color)
         {
             this.centerPoint = centerPoint;
@@ -27,7 +27,7 @@ namespace paint
             drawController();
         }
 
-
+        //calculating distance from center, while mouse hovering over canvas-paint area.
         public void distanceFromCenterCalculator()
         {
             distanceFromCenter = Convert.ToInt32(Math.Sqrt(Math.Pow(centerPoint.X - endPoint.X, 2) + Math.Pow(centerPoint.Y - endPoint.Y, 2)));
@@ -47,27 +47,26 @@ namespace paint
             }
         }
 
+        //draw controller act like a shape class main management. The program updates shape class via drawController().
         public void drawController()
         {
             distanceFromCenterCalculator();
 
             shapeCornerDedector();
 
-
-            for (int i = 0; i < Consts.boundPoints.Length; i++)
+            for (int i = 0; i < Variables.boundPoints.Length; i++)
             {
                 for (int j = 0; j < shapeCornerPoints.Length; j++)
                 {
-                    if (Convert.ToInt32(Math.Sqrt(Math.Pow(Consts.boundPoints[i].X - shapeCornerPoints[j].X, 2) + Math.Pow(Consts.boundPoints[i].Y - shapeCornerPoints[j].Y, 2))) < 2)
+                    if (Convert.ToInt32(Math.Sqrt(Math.Pow(Variables.boundPoints[i].X - shapeCornerPoints[j].X, 2) + Math.Pow(Variables.boundPoints[i].Y - shapeCornerPoints[j].Y, 2))) < 2)
                     {
-                        Consts.programMod = Consts.ProgramMode.stopDrawing;
-
+                        Variables.programMod = Variables.ProgramMode.stopDrawing;
                     }
                 }
             }
         }
 
-        //label creator
+        //label creator which makes drawn object selectable.
         public void selectablePart(ref PictureBox c)
         {
             selectableArea = new Label();
@@ -109,7 +108,7 @@ namespace paint
             selectableArea.Location = p;
             selectableArea.Width = (int)(distanceFromCenter * 1.2);
             selectableArea.Height = (int)(distanceFromCenter * 1.2);
-                
+
             selectableArea.Visible = false;
             c.Controls.Add(selectableArea);
             selectableArea.BringToFront();

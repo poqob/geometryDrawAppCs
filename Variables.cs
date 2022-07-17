@@ -3,7 +3,7 @@
 
 namespace paint
 {
-    public static class Consts
+    public static class Variables
     {
 
         //shapes.

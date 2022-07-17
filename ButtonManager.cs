@@ -20,7 +20,7 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedModeButtonBackround.Location = p;
             choosedModeButtonBackround.Size = new Size(33, 38);
-            choosedModeButtonBackround.BackColor = Consts.buttonBackColor;
+            choosedModeButtonBackround.BackColor = Variables.buttonBackColor;
             box.Controls.Add(choosedModeButtonBackround);
             choosedModeButtonBackround.BringToFront();
             b.BringToFront();
@@ -36,7 +36,7 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedColorButtonBackround.Location = p;
             choosedColorButtonBackround.Size = new Size(33, 38);
-            choosedColorButtonBackround.BackColor = Consts.buttonBackColor;
+            choosedColorButtonBackround.BackColor = Variables.buttonBackColor;
             box.Controls.Add(choosedColorButtonBackround);
             choosedColorButtonBackround.BringToFront();
             b.BringToFront();
@@ -53,7 +53,7 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedShapeButtonBackround.Location = p;
             choosedShapeButtonBackround.Size = new Size(44, 48);
-            choosedShapeButtonBackround.BackColor = Consts.buttonBackColor;
+            choosedShapeButtonBackround.BackColor = Variables.buttonBackColor;
             box.Controls.Add(choosedShapeButtonBackround);
             choosedShapeButtonBackround.BringToFront();
             b.BringToFront();
@@ -90,26 +90,26 @@ namespace paint
             {
                 //cases for shape buttons
                 case "triangle":
-                    Consts.choosedShape = Consts.Shapes.triangle;
+                    Variables.choosedShape = Variables.Shapes.triangle;
                     break;
                 case "rectangle":
-                    Consts.choosedShape = Consts.Shapes.rectangle;
+                    Variables.choosedShape = Variables.Shapes.rectangle;
                     break;
                 case "pentagon":
-                    Consts.choosedShape = Consts.Shapes.pentagon;
+                    Variables.choosedShape = Variables.Shapes.pentagon;
                     break;
                 case "hexagon":
-                    Consts.choosedShape = Consts.Shapes.hexagon;
+                    Variables.choosedShape = Variables.Shapes.hexagon;
                     break;
                 case "heptagon":
-                    Consts.choosedShape = Consts.Shapes.heptagon;
+                    Variables.choosedShape = Variables.Shapes.heptagon;
                     break;
                 case "circle":
-                    Consts.choosedShape = Consts.Shapes.circle;
+                    Variables.choosedShape = Variables.Shapes.circle;
                     break;
                 //default for color buttons
                 default:
-                    Consts.pen.Color = b.BackColor;
+                    Variables.pen.Color = b.BackColor;
                     break;
             }
         }
