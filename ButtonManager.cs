@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using System.Collections;
-
 
 namespace paint
 {
@@ -14,8 +9,8 @@ namespace paint
         static Label choosedShapeButtonBackround = new Label();
         static Label choosedColorButtonBackround = new Label();
         static Label choosedModeButtonBackround = new Label();
-        private static Color color = Color.SeaGreen;
 
+        //which mode button's backround will be painted, determines when button pressed.
         public static void modeButtonBackround(ref Button b, ref GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
@@ -25,12 +20,14 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedModeButtonBackround.Location = p;
             choosedModeButtonBackround.Size = new Size(33, 38);
-            choosedModeButtonBackround.BackColor = color;
+            choosedModeButtonBackround.BackColor = Consts.buttonBackColor;
             box.Controls.Add(choosedModeButtonBackround);
             choosedModeButtonBackround.BringToFront();
             b.BringToFront();
 
         }
+
+        //which color button's backround will be painted, determines when button pressed.
         public static void colorButtonBackround(Button b, GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
@@ -39,7 +36,7 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedColorButtonBackround.Location = p;
             choosedColorButtonBackround.Size = new Size(33, 38);
-            choosedColorButtonBackround.BackColor = color;
+            choosedColorButtonBackround.BackColor = Consts.buttonBackColor;
             box.Controls.Add(choosedColorButtonBackround);
             choosedColorButtonBackround.BringToFront();
             b.BringToFront();
@@ -47,6 +44,7 @@ namespace paint
 
         }
 
+        //which shape button's backround will be painted, determines when button pressed.
         public static void shapeButtonBackround(Button b, GroupBox box)
         {
             Control[] a = box.Controls.Find(b.Name, true);
@@ -55,13 +53,14 @@ namespace paint
             p.Y += a[0].Location.Y;
             choosedShapeButtonBackround.Location = p;
             choosedShapeButtonBackround.Size = new Size(44, 48);
-            choosedShapeButtonBackround.BackColor = color;
+            choosedShapeButtonBackround.BackColor = Consts.buttonBackColor;
             box.Controls.Add(choosedShapeButtonBackround);
             choosedShapeButtonBackround.BringToFront();
             b.BringToFront();
             setActiveButton(ref b);
         }
 
+        //which shape button's backround will be painted, determines in choose mode.
         public static void shapeButtonBackroundFromChooseOperation(string shape)
         {
             Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox1", true);
@@ -73,6 +72,7 @@ namespace paint
 
         }
 
+        //which color button's backround will be painted, determines in choose mode.
         public static void colorButtonBackroundFromChooseOperation(Color color)
         {
             Control[] boxT = Form1.ActiveForm.Controls.Find("groupBox2", true);
@@ -83,11 +83,12 @@ namespace paint
             colorButtonBackround(button, box);
         }
 
-        
+        //set active button after selecting any shape in canvas-paint area when in choose mode.
         private static void setActiveButton(ref Button b)
         {
             switch (b.Name)
             {
+                //cases for shape buttons
                 case "triangle":
                     Consts.choosedShape = Consts.Shapes.triangle;
                     break;
@@ -106,12 +107,11 @@ namespace paint
                 case "circle":
                     Consts.choosedShape = Consts.Shapes.circle;
                     break;
+                //default for color buttons
                 default:
                     Consts.pen.Color = b.BackColor;
                     break;
             }
-
-
         }
     }
 }

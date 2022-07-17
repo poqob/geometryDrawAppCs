@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace paint
 {
@@ -27,6 +26,7 @@ namespace paint
             JsonOperations.tempJsonCreator();
             bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bm);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             JsonOperations.jsonCleaner(ref g);
             pictureBox1.Image = bm;
         }
@@ -156,6 +156,7 @@ namespace paint
             }
         }
 
+        //clears all canvas-painting area.
         private void recyle_Click(object sender, EventArgs e)
         {
             foreach (Label lb in pictureBox1.Controls)
@@ -180,6 +181,7 @@ namespace paint
 
         }
 
+        //shifting choose mode
         private void choose_Click(object sender, EventArgs e)
         {
             Button b = (Button)sender;
@@ -190,11 +192,9 @@ namespace paint
             {
                 lb.Visible = true;
             }
-
-            //shape.selectablePart(ref this.pictureBox1);
-
         }
 
+        //File operation buttons.
         private void openFileButton(object sender, EventArgs e)
         {
             JsonOperations.openPaintFromFolder(ref g);
@@ -210,6 +210,8 @@ namespace paint
             g = pictureBox1.CreateGraphics();
         }
 
+
+        //canvas-paint area paint event function.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             l = e.Graphics;
@@ -224,20 +226,3 @@ namespace paint
         }
     }
 }
-
-
-// TODO:
-//create selectable IShapes-Polygons.++
-//save shape and color data before shifting to choose mode.
-//turn that options while shifting back to draw mode.
-
-
-
-
-
-
-//STATUS:
-//working on bitmaps, may i found a way to save a selectable shape in it.
-//**may i use label as container because it has click property.++
-
-

@@ -10,20 +10,16 @@ namespace paint
         public enum Shapes { noShape = 0, triangle = 3, rectangle = 4, pentagon = 5, hexagon = 6, heptagon = 7, circle = 50 };
         //program mode.
         public enum ProgramMode { choosing = 0, stopDrawing = 1, draw = 2 };
-
-        //canvas/painting area's bound points.
+        //canvas-painting area's bound points.
         public static Point[] boundPoints;
-        //program mode.
+        //current program mode.
         public static ProgramMode programMod;
         public static Shapes choosedShape;
+        //pen variable for drawing operation.
         public static Pen pen;
+        //Button menu, selected button background color.
+        public static Color buttonBackColor = Color.SeaGreen;
 
-
-
-
-        //TODO: all edges will be pointed we only have 2 edges just now. L,R,T,Bottom++
-        //dedecting paint area bounds point by point.++
-        //paintAreaSize stores width and height values of paint area/canvas.++
 
         //purpose of paintAreaBoundPointsDedector() is to dedect paint area bound point by point and attempt that points to boundPoints(Point[]) variable.
         public static void paintAreaBoundPointsDedector(Size paintAreaSize)

@@ -7,7 +7,7 @@ namespace paint
     //i added 6 shapes as built-in.
     //Polygon() class can also generate circle with corners.
     //the Circle definition: a polygon that becomes with endless corners.
-    public class Polygon : IShape
+    public class Polygon 
     {
         public Point centerPoint { get; set; }
         public Point endPoint { get; set; }
@@ -114,10 +114,3 @@ namespace paint
     }
 }
 
-
-//TODO
-//add circle class.
-//add line class.
-//add free pen class.
-//gather them under IShape.
-//will change the shapes label visibility accord,ng to created shape.
