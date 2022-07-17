@@ -7,18 +7,6 @@ using System.Collections;
 namespace paint
 {
 
-    //Modal class
-    public class JsonModalObject
-    {
-        public Polygon shape { get; set; }
-        public Color color { get; set; }
-        public JsonModalObject(Polygon shape, Color color)
-        {
-            this.shape = shape;
-            this.color = color;
-        }
-    }
-
     class JsonOperations
     {
 
@@ -33,7 +21,7 @@ namespace paint
 
         private static string json;
 
-        private static JsonModalObject jsonModalObject;
+        private static Polygon polygon;
 
         private static ArrayList tempJsonObjects = new ArrayList();
 
@@ -51,18 +39,36 @@ namespace paint
             }
         }
 
+
+
+
+
+
+
+
+
+
+
         //converts the graphical object input into the json output.
-        public static void jsonWriter(ref Polygon shape, Color color)
+
+        public static void jsonWriter(ref Polygon shape)
         {
             tempJsonCreator(); //controlls if the temp.json file is exist.
-            jsonModalObject = new JsonModalObject(shape, color);
-            tempJsonObjects.Add(jsonModalObject);
+            polygon = new Polygon(shape.totalCornerNum, shape.centerPoint, shape.endPoint, shape.color);
+            tempJsonObjects.Add(polygon);
             json = JsonConvert.SerializeObject(tempJsonObjects);
             File.WriteAllText(tempJsonFilePath, json);
         }
 
+
+
+
+
+
+
+
         //this function creates objects from json file and paint them into the canvas-paint area.
-        public static void jsonPainter(ref Graphics g)
+        public static void jsonPainter(ref Graphics g, ref PictureBox pb)
         {
             ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
             if (jArray != null)
@@ -72,20 +78,42 @@ namespace paint
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     //making json string to objects
-                    JsonModalObject jObject = JsonConvert.DeserializeObject<JsonModalObject>(jArray[i].ToString());
+                    Polygon jObject = JsonConvert.DeserializeObject<Polygon>(jArray[i].ToString());
                     pen.Color = jObject.color;
+                    //problemo...
+                    //pb.Controls.Add(jObject.selectableArea);
+                    //jObject.selectableArea.BringToFront();
                     //painting 
-                    g.DrawPolygon(pen, jObject.shape.shapeCornerPoints);
-                    g.FillPolygon(pen.Brush, jObject.shape.shapeCornerPoints);
+                    g.DrawPolygon(pen, jObject.shapeCornerPoints);
+                    g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
+                    jObject.selectablePart(ref pb);
                     //adding new shapes to our tempArrayList-tempJsonObjects
                     tempJsonObjects.Add(jObject);
                 }
             }
-
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //imports a painting from local folder.
-        public static void openPaintFromFolder(ref Graphics g)
+        public static void openPaintFromFolder(ref Graphics g, ref PictureBox pb)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.RestoreDirectory = true;
@@ -102,7 +130,7 @@ namespace paint
                 File.WriteAllText(tempJsonFilePath, File.ReadAllText(dialog.FileName));
                 json = File.ReadAllText(dialog.FileName);
                 //painting new shapes.
-                jsonPainter(ref g);
+                jsonPainter(ref g, ref pb);
             }
 
         }

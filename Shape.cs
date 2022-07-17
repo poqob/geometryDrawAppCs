@@ -15,7 +15,7 @@ namespace paint
         public PointF[] shapeCornerPoints { get; set; }
         public int distanceFromCenter { get; set; }
         private Label selectableArea;
-        private Color color;
+        public Color color;
 
         //Constructer
         public Polygon(int totalCornerNum, Point centerPoint, Point endPoint, Color color)
@@ -109,7 +109,7 @@ namespace paint
             selectableArea.Location = p;
             selectableArea.Width = (int)(distanceFromCenter * 1.2);
             selectableArea.Height = (int)(distanceFromCenter * 1.2);
-
+                
             selectableArea.Visible = false;
             c.Controls.Add(selectableArea);
             selectableArea.BringToFront();

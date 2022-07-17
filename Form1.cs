@@ -51,10 +51,7 @@ namespace paint
             isMouseDown = false;
 
 
-            if (shape != null && Consts.programMod != Consts.ProgramMode.stopDrawing)
-            {
-                JsonOperations.jsonWriter(ref shape, Consts.pen.Color);
-            }
+
             if (Consts.choosedShape != Consts.Shapes.noShape && Consts.programMod == Consts.ProgramMode.draw)
             {
                 shape.endPoint = endLocation;
@@ -63,7 +60,10 @@ namespace paint
                 g.FillPolygon(Consts.pen.Brush, shape.shapeCornerPoints);
                 shape.selectablePart(ref pictureBox1);
             }
-
+            if (shape != null && Consts.programMod != Consts.ProgramMode.stopDrawing)
+            {
+                JsonOperations.jsonWriter(ref shape);
+            }
 
         }
         //start painting
@@ -197,7 +197,8 @@ namespace paint
         //File operation buttons.
         private void openFileButton(object sender, EventArgs e)
         {
-            JsonOperations.openPaintFromFolder(ref g);
+            JsonOperations.openPaintFromFolder(ref g, ref pictureBox1);
+            pictureBox1.Refresh();
         }
 
         private void saveFileButton(object sender, EventArgs e)
