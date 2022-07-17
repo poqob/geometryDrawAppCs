@@ -47,7 +47,7 @@ namespace paint
             this.darkOrange = new System.Windows.Forms.Button();
             this.red = new System.Windows.Forms.Button();
             this.seaGreen = new System.Windows.Forms.Button();
-            this.royaleBlue = new System.Windows.Forms.Button();
+            this.RoyalBlue = new System.Windows.Forms.Button();
             this.khaki = new System.Windows.Forms.Button();
             this.darkOrchid = new System.Windows.Forms.Button();
             this.cyan = new System.Windows.Forms.Button();
@@ -188,7 +188,7 @@ namespace paint
             this.groupBox2.Controls.Add(this.darkOrange);
             this.groupBox2.Controls.Add(this.red);
             this.groupBox2.Controls.Add(this.seaGreen);
-            this.groupBox2.Controls.Add(this.royaleBlue);
+            this.groupBox2.Controls.Add(this.RoyalBlue);
             this.groupBox2.Controls.Add(this.khaki);
             this.groupBox2.Controls.Add(this.darkOrchid);
             this.groupBox2.Controls.Add(this.cyan);
@@ -232,15 +232,15 @@ namespace paint
             this.seaGreen.UseVisualStyleBackColor = false;
             this.seaGreen.Click += new System.EventHandler(this.colorChooseClick);
             // 
-            // royaleBlue
+            // RoyalBlue
             // 
-            this.royaleBlue.BackColor = System.Drawing.Color.RoyalBlue;
-            this.royaleBlue.Location = new System.Drawing.Point(52, 21);
-            this.royaleBlue.Name = "royaleBlue";
-            this.royaleBlue.Size = new System.Drawing.Size(36, 39);
-            this.royaleBlue.TabIndex = 8;
-            this.royaleBlue.UseVisualStyleBackColor = false;
-            this.royaleBlue.Click += new System.EventHandler(this.colorChooseClick);
+            this.RoyalBlue.BackColor = System.Drawing.Color.RoyalBlue;
+            this.RoyalBlue.Location = new System.Drawing.Point(52, 21);
+            this.RoyalBlue.Name = "RoyalBlue";
+            this.RoyalBlue.Size = new System.Drawing.Size(36, 39);
+            this.RoyalBlue.TabIndex = 8;
+            this.RoyalBlue.UseVisualStyleBackColor = false;
+            this.RoyalBlue.Click += new System.EventHandler(this.colorChooseClick);
             // 
             // khaki
             // 
@@ -448,7 +448,7 @@ namespace paint
         private System.Windows.Forms.Button darkOrange;
         private System.Windows.Forms.Button darkOrchid;
         private System.Windows.Forms.Button khaki;
-        private System.Windows.Forms.Button royaleBlue;
+        private System.Windows.Forms.Button RoyalBlue;
         private System.Windows.Forms.Button seaGreen;
         private System.Windows.Forms.Button red;
         private System.Windows.Forms.Label label3;

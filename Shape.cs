@@ -7,7 +7,7 @@ namespace paint
     //i added 6 shapes as built-in.
     //Polygon() class can also generate circle with corners.
     //the Circle definition: a polygon that becomes with endless corners.
-    public class Polygon 
+    public class Polygon
     {
         public Point centerPoint { get; set; }
         public Point endPoint { get; set; }
@@ -103,13 +103,14 @@ namespace paint
                 }
                 ButtonManager.shapeButtonBackroundFromChooseOperation(shape);
             };
-            Point p = new Point(centerPoint.X - distanceFromCenter/4-15, centerPoint.Y - distanceFromCenter/4-15);
+            Point p = new Point(centerPoint.X - distanceFromCenter / 4 - 15, centerPoint.Y - distanceFromCenter / 4 - 15);
 
             selectableArea.Location = p;
             selectableArea.Width = (int)(distanceFromCenter * 1.2);
-            selectableArea.Height = (int)(distanceFromCenter*1.2);
+            selectableArea.Height = (int)(distanceFromCenter * 1.2);
             selectableArea.Visible = false;
             c.Controls.Add(selectableArea);
+            selectableArea.BringToFront();
         }
     }
 }
