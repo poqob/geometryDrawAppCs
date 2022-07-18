@@ -179,8 +179,8 @@ namespace paint
                 {
                     lb.Dispose();
                 }
-            } while (pictureBox1.Controls.Count!=0);
-            
+            } while (pictureBox1.Controls.Count != 0);
+
 
             JsonOperations.jsonCleaner(ref g);
             pictureBox1.Refresh();
@@ -193,11 +193,34 @@ namespace paint
             Button b = (Button)sender;
             Variables.programMod = Variables.ProgramMode.choosing;
             ButtonManager.modeButtonBackround(ref b, ref groupBox4);
-            //IShapes-Polygonses controller make them visible.
+            //IShapes-Polygon's controller make them visible.
             foreach (Label lb in pictureBox1.Controls)
             {
                 lb.Visible = true;
             }
+        }
+
+        //eraser button click event
+        private void eraseClick(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            Variables.programMod = Variables.ProgramMode.erase;
+            ButtonManager.modeButtonBackround(ref b, ref groupBox4);
+            
+
+            foreach (Label lb in pictureBox1.Controls)
+            {
+                lb.Visible = true;
+            }
+
+            if (Variables.programMod == Variables.ProgramMode.erase)
+            {
+                foreach (Label lb in pictureBox1.Controls)
+                {
+                   //we are here delete action will be added.
+                }
+            }
+
         }
 
         //File operation buttons.
@@ -209,7 +232,7 @@ namespace paint
 
         private void saveFileButton(object sender, EventArgs e)
         {
-            JsonOperations.savePaintToFolder(ref g,ref pictureBox1);
+            JsonOperations.savePaintToFolder(ref g, ref pictureBox1);
             pictureBox1.Refresh();
         }
 
@@ -232,5 +255,7 @@ namespace paint
                 l.FillPolygon(Variables.pen.Brush, shape.shapeCornerPoints);
             }
         }
+
+
     }
 }

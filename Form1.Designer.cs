@@ -35,6 +35,7 @@ namespace paint
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.eraser = new System.Windows.Forms.Button();
             this.recyle = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.choose = new System.Windows.Forms.Button();
@@ -87,6 +88,7 @@ namespace paint
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.eraser);
             this.groupBox4.Controls.Add(this.recyle);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.choose);
@@ -94,9 +96,20 @@ namespace paint
             this.groupBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.groupBox4.Location = new System.Drawing.Point(5, 364);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(141, 93);
+            this.groupBox4.Size = new System.Drawing.Size(141, 117);
             this.groupBox4.TabIndex = 25;
             this.groupBox4.TabStop = false;
+            // 
+            // eraser
+            // 
+            this.eraser.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("eraser.BackgroundImage")));
+            this.eraser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.eraser.Location = new System.Drawing.Point(8, 66);
+            this.eraser.Name = "eraser";
+            this.eraser.Size = new System.Drawing.Size(36, 39);
+            this.eraser.TabIndex = 19;
+            this.eraser.UseVisualStyleBackColor = true;
+            this.eraser.Click += new System.EventHandler(this.eraseClick);
             // 
             // recyle
             // 
@@ -146,7 +159,7 @@ namespace paint
             this.groupBox3.Controls.Add(this.save);
             this.groupBox3.Controls.Add(this.open);
             this.groupBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.groupBox3.Location = new System.Drawing.Point(3, 463);
+            this.groupBox3.Location = new System.Drawing.Point(3, 487);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(143, 83);
             this.groupBox3.TabIndex = 2;
@@ -465,5 +478,6 @@ namespace paint
         private System.Windows.Forms.Button heptagon;
         private System.Windows.Forms.Button circle;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button eraser;
     }
 }

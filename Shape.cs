@@ -65,7 +65,12 @@ namespace paint
                 }
             }
         }
-
+        public void eraser(ref PictureBox pb,ref Graphics g)
+        {
+            color = Color.Transparent;
+            g.DrawPolygon(new Pen(color), shapeCornerPoints);
+            
+        }
         //label creator which makes drawn object selectable.
         public void selectablePart(ref PictureBox c)
         {
@@ -73,6 +78,14 @@ namespace paint
             selectableArea.BackColor = Color.FromArgb(100, Color.Gray);
             selectableArea.Click += delegate (object sender, EventArgs e)
             {
+
+                if (Variables.programMod == Variables.ProgramMode.erase)
+                {
+                    
+                   
+                    selectableArea.Dispose();
+                }
+
                 //choose color button 
                 ButtonManager.colorButtonBackroundFromChooseOperation(color);
                 //choose shape button 
@@ -102,7 +115,12 @@ namespace paint
                     }
                 }
                 ButtonManager.shapeButtonBackroundFromChooseOperation(shape);
+
+
             };
+
+            
+
             Point p = new Point(centerPoint.X - distanceFromCenter / 2, centerPoint.Y - distanceFromCenter / 2);
 
             selectableArea.Location = p;
@@ -113,6 +131,11 @@ namespace paint
             c.Controls.Add(selectableArea);
             selectableArea.BringToFront();
         }
+
+        
+
+
     }
 }
 
+//silme operasyonu zort

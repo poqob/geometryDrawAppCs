@@ -9,7 +9,7 @@ namespace paint
         //shapes.
         public enum Shapes { noShape = 0, triangle = 3, rectangle = 4, pentagon = 5, hexagon = 6, heptagon = 7, circle = 50 };
         //program mode.
-        public enum ProgramMode { choosing = 0, stopDrawing = 1, draw = 2 };
+        public enum ProgramMode { choosing = 0, stopDrawing = 1, draw = 2 ,erase=3};
         //canvas-painting area's bound points.
         public static Point[] boundPoints;
         //current program mode.
