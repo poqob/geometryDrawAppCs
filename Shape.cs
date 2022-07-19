@@ -116,7 +116,6 @@ namespace paint
                 if (Variables.programMod == Variables.ProgramMode.erase)
                 {
                     JsonOperations.jsonEraser(index, g, c);
-                    selectableArea.Dispose();
                 }
 
             };

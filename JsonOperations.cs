@@ -176,7 +176,7 @@ namespace paint
             Variables.count = 0;
 
             ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
-            if (jArray != null)
+            if (jArray.Count != 0)
             {
 
 

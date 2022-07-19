@@ -60,7 +60,7 @@ namespace paint
                 shape.drawController();
                 g.DrawPolygon(Variables.pen, shape.shapeCornerPoints);
                 g.FillPolygon(Variables.pen.Brush, shape.shapeCornerPoints);
-                shape.selectablePart( pictureBox1,g);
+                shape.selectablePart(pictureBox1, g);
             }
             if (shape != null && Variables.programMod != Variables.ProgramMode.stopDrawing)
             {
@@ -88,11 +88,7 @@ namespace paint
             {
                 shape = new Polygon(((int)Variables.choosedShape), startLocation, endLocation, Variables.pen.Color);
             }
-            //selectable arealarda lokasyon bilgilerini depola ve bu bilgileri kullanarakr yeni çiizm yarat ama ara plan renginde.
-            if (Variables.programMod == Variables.ProgramMode.erase)
-            {
-                
-            }
+
         }
 
 
@@ -255,3 +251,6 @@ namespace paint
 
     }
 }
+
+//Last problem, erase operation:
+//erase operation works even scene hasn't got any shape data -json file and json string-
