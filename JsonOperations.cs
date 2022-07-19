@@ -178,8 +178,6 @@ namespace paint
             ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
             if (jArray.Count != 0)
             {
-
-
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     //making json string to objects
@@ -193,7 +191,6 @@ namespace paint
                     //adding new shapes to our tempArrayList-tempJsonObjects
                     tempJsonObjects.Add(jObject);
                 }
-
             }
             else
             {

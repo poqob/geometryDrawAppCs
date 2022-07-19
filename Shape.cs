@@ -68,6 +68,7 @@ namespace paint
             }
         }
 
+        //shape counter.
         private int counter()
         {
             index = Variables.count++;
@@ -120,8 +121,7 @@ namespace paint
 
             };
 
-
-
+            //selectable area-label properities.
             Point p = new Point(centerPoint.X - distanceFromCenter / 2, centerPoint.Y - distanceFromCenter / 2);
 
             selectableArea.Location = p;

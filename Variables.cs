@@ -20,6 +20,7 @@ namespace paint
         //Button menu, selected button background color.
         public static Color buttonBackColor = Color.SeaGreen;
 
+        //static variable for Polgon.counter() function.
         public static int count=0;
 
 

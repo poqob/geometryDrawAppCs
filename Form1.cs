@@ -208,7 +208,7 @@ namespace paint
             Button b = (Button)sender;
             Variables.programMod = Variables.ProgramMode.erase;
             ButtonManager.modeButtonBackround(ref b, ref groupBox4);
-
+            //make visible all painted object's label.
             foreach (Label lb in pictureBox1.Controls)
             {
                 lb.Visible = true;
@@ -228,6 +228,7 @@ namespace paint
             pictureBox1.Refresh();
         }
 
+        //may V0.4 will be resizable.
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
             g = pictureBox1.CreateGraphics();
