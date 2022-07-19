@@ -15,6 +15,8 @@ namespace paint
         public PointF[] shapeCornerPoints { get; set; }
         public int distanceFromCenter { get; set; }
         private Label selectableArea;
+        private int index;
+
         public Color color;
 
         //Constructer for Polygon.
@@ -65,27 +67,23 @@ namespace paint
                 }
             }
         }
-        public void eraser(ref PictureBox pb,ref Graphics g)
+
+        private int counter()
         {
-            color = Color.Transparent;
-            g.DrawPolygon(new Pen(color), shapeCornerPoints);
-            
+            index = Variables.count++;
+            return index;
         }
+
+
+
         //label creator which makes drawn object selectable.
-        public void selectablePart(ref PictureBox c)
+        public void selectablePart(PictureBox c, Graphics g)
         {
             selectableArea = new Label();
             selectableArea.BackColor = Color.FromArgb(100, Color.Gray);
+            selectableArea.Name = counter().ToString();
             selectableArea.Click += delegate (object sender, EventArgs e)
             {
-
-                if (Variables.programMod == Variables.ProgramMode.erase)
-                {
-                    
-                   
-                    selectableArea.Dispose();
-                }
-
                 //choose color button 
                 ButtonManager.colorButtonBackroundFromChooseOperation(color);
                 //choose shape button 
@@ -115,11 +113,15 @@ namespace paint
                     }
                 }
                 ButtonManager.shapeButtonBackroundFromChooseOperation(shape);
-
+                if (Variables.programMod == Variables.ProgramMode.erase)
+                {
+                    JsonOperations.jsonEraser(index, g, c);
+                    selectableArea.Dispose();
+                }
 
             };
 
-            
+
 
             Point p = new Point(centerPoint.X - distanceFromCenter / 2, centerPoint.Y - distanceFromCenter / 2);
 
@@ -132,7 +134,7 @@ namespace paint
             selectableArea.BringToFront();
         }
 
-        
+
 
 
     }

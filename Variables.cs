@@ -20,6 +20,8 @@ namespace paint
         //Button menu, selected button background color.
         public static Color buttonBackColor = Color.SeaGreen;
 
+        public static int count=0;
+
 
         //purpose of paintAreaBoundPointsDedector() is to dedect paint area bound point by point and attempt that points to boundPoints(Point[]) variable.
         public static void paintAreaBoundPointsDedector(Size paintAreaSize)

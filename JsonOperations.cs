@@ -19,7 +19,7 @@ namespace paint
 
         private static Polygon polygon;
 
-        private static ArrayList tempJsonObjects = new ArrayList();
+        public static ArrayList tempJsonObjects = new ArrayList();
 
 
         private static string tempJsonFilePath = AppDomain.CurrentDomain.BaseDirectory + "temp.json";
@@ -61,7 +61,7 @@ namespace paint
                     //painting 
                     g.DrawPolygon(pen, jObject.shapeCornerPoints);
                     g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
-                    jObject.selectablePart(ref pb);
+                    jObject.selectablePart(pb, g);
                     //adding new shapes to our tempArrayList-tempJsonObjects
                     tempJsonObjects.Add(jObject);
                 }
@@ -144,6 +144,62 @@ namespace paint
             }
         }
 
+        //erase only one object.
+        public static void jsonEraser(int index, Graphics g, PictureBox pb)
+        {
+            tempJsonObjects.RemoveAt(index);
+            json = JsonConvert.SerializeObject(tempJsonObjects);
+            File.WriteAllText(tempJsonFilePath, json);
+
+            do
+            {
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+            } while (pb.Controls.Count != 0);
+
+            tempJsonObjects.Clear();
+            g.Clear(Color.OldLace);
+            Variables.count = 0;
+
+            ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
+            if (jArray != null)
+            {
+
+
+                for (int i = 0; i < jArray.Count; i++)
+                {
+                    //making json string to objects
+                    Polygon jObject = JsonConvert.DeserializeObject<Polygon>(jArray[i].ToString());
+                    pen.Color = jObject.color;
+
+                    //painting 
+                    g.DrawPolygon(pen, jObject.shapeCornerPoints);
+                    g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
+                    jObject.selectablePart(pb, g);
+                    //adding new shapes to our tempArrayList-tempJsonObjects
+                    tempJsonObjects.Add(jObject);
+                }
+
+            }
+            else
+            {
+                jsonCleaner(ref g);
+            }
+        }
 
         //clear the shape array and .jason file content's which is temp file.
         public static void jsonCleaner(ref Graphics g)
@@ -151,11 +207,12 @@ namespace paint
             tempJsonObjects.Clear();
             File.WriteAllText(tempJsonFilePath, "");
             g.Clear(Color.OldLace);
-
+            Variables.count = 0;
         }
         //Destructor for json file.
         public static void jsonExplode()
         {
+            Variables.count = 0;
             fs.Dispose();
             File.Delete(tempJsonFilePath);
         }

@@ -60,12 +60,13 @@ namespace paint
                 shape.drawController();
                 g.DrawPolygon(Variables.pen, shape.shapeCornerPoints);
                 g.FillPolygon(Variables.pen.Brush, shape.shapeCornerPoints);
-                shape.selectablePart(ref pictureBox1);
+                shape.selectablePart( pictureBox1,g);
             }
             if (shape != null && Variables.programMod != Variables.ProgramMode.stopDrawing)
             {
                 JsonOperations.jsonWriter(ref shape);
             }
+
 
         }
         //start painting
@@ -86,6 +87,11 @@ namespace paint
             if (isMouseDown && Variables.choosedShape != Variables.Shapes.noShape && Variables.programMod == Variables.ProgramMode.draw)
             {
                 shape = new Polygon(((int)Variables.choosedShape), startLocation, endLocation, Variables.pen.Color);
+            }
+            //selectable arealarda lokasyon bilgilerini depola ve bu bilgileri kullanarakr yeni çiizm yarat ama ara plan renginde.
+            if (Variables.programMod == Variables.ProgramMode.erase)
+            {
+                
             }
         }
 
@@ -206,21 +212,11 @@ namespace paint
             Button b = (Button)sender;
             Variables.programMod = Variables.ProgramMode.erase;
             ButtonManager.modeButtonBackround(ref b, ref groupBox4);
-            
 
             foreach (Label lb in pictureBox1.Controls)
             {
                 lb.Visible = true;
             }
-
-            if (Variables.programMod == Variables.ProgramMode.erase)
-            {
-                foreach (Label lb in pictureBox1.Controls)
-                {
-                   //we are here delete action will be added.
-                }
-            }
-
         }
 
         //File operation buttons.
