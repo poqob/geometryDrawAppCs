@@ -99,6 +99,7 @@ namespace paint
             Button b = (Button)sender;
             Variables.pen.Color = b.BackColor;
             ButtonManager.colorButtonBackround(b, groupBox2);
+            Variables.activeColorForColorChanger = b.BackColor;
         }
 
         //choosing which shape clicked.

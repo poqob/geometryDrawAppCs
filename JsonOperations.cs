@@ -198,6 +198,58 @@ namespace paint
             }
         }
 
+        //user can change color of objects via this function.
+        public static void jsonColorChanger(int index, Graphics g, PictureBox pb)
+        {
+            //change determined object's color data.
+            Polygon p = new Polygon(p.totalCornerNum, p.centerPoint, p.endPoint, Variables.activeColorForColorChanger);
+            
+            json = JsonConvert.SerializeObject(tempJsonObjects);
+            File.WriteAllText(tempJsonFilePath, json);
+
+            do
+            {
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+                foreach (Label lb in pb.Controls)
+                {
+                    lb.Dispose();
+                }
+            } while (pb.Controls.Count != 0);
+
+            tempJsonObjects.Clear();
+            g.Clear(Color.OldLace);
+            Variables.count = 0;
+
+            ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
+            if (jArray.Count != 0)
+            {
+                for (int i = 0; i < jArray.Count; i++)
+                {
+                    //making json string to objects
+                    Polygon jObject = JsonConvert.DeserializeObject<Polygon>(jArray[i].ToString());
+                    pen.Color = jObject.color;
+
+                    //painting 
+                    g.DrawPolygon(pen, jObject.shapeCornerPoints);
+                    g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
+                    jObject.selectablePart(pb, g);
+                    //adding new shapes to our tempArrayList-tempJsonObjects
+                    tempJsonObjects.Add(jObject);
+                }
+            }
+        }
+
         //clear the shape array and .jason file content's which is temp file.
         public static void jsonCleaner(ref Graphics g)
         {
