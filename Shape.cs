@@ -119,6 +119,11 @@ namespace paint
                     JsonOperations.jsonEraser(index, g, c);
                 }
 
+                if (Variables.programMod==Variables.ProgramMode.choosing)
+                {
+                    Variables.activeShapeIndex = index;
+                }
+
             };
 
             //selectable area-label properities.

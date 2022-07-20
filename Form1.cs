@@ -100,6 +100,8 @@ namespace paint
             Variables.pen.Color = b.BackColor;
             ButtonManager.colorButtonBackround(b, groupBox2);
             Variables.activeColorForColorChanger = b.BackColor;
+
+            JsonOperations.jsonColorChanger(g,pictureBox1);
         }
 
         //choosing which shape clicked.

@@ -3,9 +3,9 @@
 
 namespace paint
 {
+    //variables are stored here.
     public static class Variables
     {
-
         //shapes.
         public enum Shapes { noShape = 0, triangle = 3, rectangle = 4, pentagon = 5, hexagon = 6, heptagon = 7, circle = 50 };
         //program mode.
@@ -19,9 +19,10 @@ namespace paint
         public static Pen pen;
         //Button menu, selected button background color.
         public static Color buttonBackColor = Color.SeaGreen;
-
+        //lastly selected color from color button menu.
         public static Color activeColorForColorChanger;
-
+        //lastly selected shape's index from canvas-paint area.
+        public static int activeShapeIndex;
         //static variable for Polgon.counter() function.
         public static int count=0;
 

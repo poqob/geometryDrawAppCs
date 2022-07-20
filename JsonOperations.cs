@@ -10,7 +10,6 @@ namespace paint
     class JsonOperations
     {
         //variables
-
         private static Pen pen = new Pen(Color.Black, 2f);
 
         private static FileStream fs;
@@ -199,55 +198,67 @@ namespace paint
         }
 
         //user can change color of objects via this function.
-        public static void jsonColorChanger(int index, Graphics g, PictureBox pb)
+        public static void jsonColorChanger(Graphics g, PictureBox pb)
         {
             //change determined object's color data.
-            Polygon p = new Polygon(p.totalCornerNum, p.centerPoint, p.endPoint, Variables.activeColorForColorChanger);
-            
-            json = JsonConvert.SerializeObject(tempJsonObjects);
-            File.WriteAllText(tempJsonFilePath, json);
-
-            do
+            //user allowed change object color only in choose mode.
+            //and ofcourse if scene has any shape.
+            if (Variables.programMod == Variables.ProgramMode.choosing && tempJsonObjects.Count != 0)
             {
-                foreach (Label lb in pb.Controls)
-                {
-                    lb.Dispose();
-                }
-                foreach (Label lb in pb.Controls)
-                {
-                    lb.Dispose();
-                }
-                foreach (Label lb in pb.Controls)
-                {
-                    lb.Dispose();
-                }
-                foreach (Label lb in pb.Controls)
-                {
-                    lb.Dispose();
-                }
-            } while (pb.Controls.Count != 0);
+                //change related object in tempJsonObjects
+                Polygon p = (Polygon)tempJsonObjects[Variables.activeShapeIndex];
+                p.color = Variables.activeColorForColorChanger;
+                tempJsonObjects.RemoveAt(Variables.activeShapeIndex);
+                tempJsonObjects.Insert(Variables.activeShapeIndex, p);
 
-            tempJsonObjects.Clear();
-            g.Clear(Color.OldLace);
-            Variables.count = 0;
+                json = JsonConvert.SerializeObject(tempJsonObjects);
+                File.WriteAllText(tempJsonFilePath, json);
 
-            ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
-            if (jArray.Count != 0)
-            {
-                for (int i = 0; i < jArray.Count; i++)
+                //clearing selectable areas of shapes.
+                do
                 {
-                    //making json string to objects
-                    Polygon jObject = JsonConvert.DeserializeObject<Polygon>(jArray[i].ToString());
-                    pen.Color = jObject.color;
+                    foreach (Label lb in pb.Controls)
+                    {
+                        lb.Dispose();
+                    }
+                    foreach (Label lb in pb.Controls)
+                    {
+                        lb.Dispose();
+                    }
+                    foreach (Label lb in pb.Controls)
+                    {
+                        lb.Dispose();
+                    }
+                    foreach (Label lb in pb.Controls)
+                    {
+                        lb.Dispose();
+                    }
+                } while (pb.Controls.Count != 0);
 
-                    //painting 
-                    g.DrawPolygon(pen, jObject.shapeCornerPoints);
-                    g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
-                    jObject.selectablePart(pb, g);
-                    //adding new shapes to our tempArrayList-tempJsonObjects
-                    tempJsonObjects.Add(jObject);
+                tempJsonObjects.Clear();
+                g.Clear(Color.OldLace);
+                Variables.count = 0;
+
+                ArrayList jArray = JsonConvert.DeserializeObject<ArrayList>(json);
+                if (jArray.Count != 0)
+                {
+                    for (int i = 0; i < jArray.Count; i++)
+                    {
+                        //making json string to objects
+                        Polygon jObject = JsonConvert.DeserializeObject<Polygon>(jArray[i].ToString());
+                        pen.Color = jObject.color;
+
+                        //painting 
+                        g.DrawPolygon(pen, jObject.shapeCornerPoints);
+                        g.FillPolygon(pen.Brush, jObject.shapeCornerPoints);
+                        jObject.selectablePart(pb, g);
+                        //adding new shapes to our tempArrayList-tempJsonObjects
+                        tempJsonObjects.Add(jObject);
+                    }
                 }
+                 pb.Refresh();
             }
+
         }
 
         //clear the shape array and .jason file content's which is temp file.
